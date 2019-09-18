@@ -30654,7 +30654,7 @@ function (_React$Component) {
   _createClass(App, [{
     key: "render",
     value: function render() {
-      return React.createElement("div", null, "hello world");
+      return React.createElement("div", null, "hello world - this is a new line of code");
     }
   }]);
 
