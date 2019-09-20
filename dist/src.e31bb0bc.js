@@ -47351,7 +47351,7 @@ exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _bikerentals = _interopRequireDefault(require("../../database/bikerentals.js"));
+var _bikerentals = require("../../database/bikerentals.js");
 
 var _reactBootstrap = require("react-bootstrap");
 
@@ -47367,9 +47367,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -47387,46 +47387,31 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ReservationPage).call(this, props));
     _this.state = {};
+    _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(ReservationPage, [{
     key: "getCarouselItems",
-    value: function getCarouselItems() {//     let items = []
-      //     for(let i = 0; i < products.length; i ++)  {
-      //         items.push(
-      //                 <Carousel.Item>
-      //                         <img
-      //                             className="d-block w-100"
-      //                             src={products.image}
-      //                             alt="slide " + {i}
-      //                         />
-      //                         <Carousel.Caption>
-      //                             <h3>{product image}</h3>
-      //                             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-      //                         </Carousel.Caption>
-      //                     </Carousel.Item>
-      //         )
-      //   }
+    value: function getCarouselItems() {
+      var items = [];
+
+      for (var i = 0; i < _bikerentals.products.length; i++) {
+        items.push(_react.default.createElement(_reactBootstrap.Carousel.Item, null, _react.default.createElement("img", {
+          className: "d-block w-100",
+          src: _bikerentals.products[i].image,
+          alt: "slide "
+        }), _react.default.createElement(_reactBootstrap.Carousel.Caption, null, _react.default.createElement("h3", null, _bikerentals.products[i].name), _react.default.createElement("p", null, "Nulla vitae elit libero, a pharetra augue mollis interdum."))));
+      }
+
+      return items;
     }
   }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
         className: "carousel"
-      }, _react.default.createElement("div", null, " ", console.log(_bikerentals.default[1]), " "), _react.default.createElement(_reactBootstrap.Carousel, null, _react.default.createElement(_reactBootstrap.Carousel.Item, null, _react.default.createElement("img", {
-        className: "d-block w-100",
-        src: "",
-        alt: "First slide"
-      }), _react.default.createElement(_reactBootstrap.Carousel.Caption, null, _react.default.createElement("h3", null, "First slide label"), _react.default.createElement("p", null, "Nulla vitae elit libero, a pharetra augue mollis interdum."))), _react.default.createElement(_reactBootstrap.Carousel.Item, null, _react.default.createElement("img", {
-        className: "d-block w-100",
-        src: "holder.js/800x400?text=Second slide&bg=282c34",
-        alt: "Third slide"
-      }), _react.default.createElement(_reactBootstrap.Carousel.Caption, null, _react.default.createElement("h3", null, "Second slide label"), _react.default.createElement("p", null, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))), _react.default.createElement(_reactBootstrap.Carousel.Item, null, _react.default.createElement("img", {
-        className: "d-block w-100",
-        src: "holder.js/800x400?text=Third slide&bg=20232a",
-        alt: "Third slide"
-      }), _react.default.createElement(_reactBootstrap.Carousel.Caption, null, _react.default.createElement("h3", null, "Third slide label"), _react.default.createElement("p", null, "Praesent commodo cursus magna, vel scelerisque nisl consectetur.")))));
+      }, _react.default.createElement("div", null, " ", console.log(this.getCarouselItems()), " "), _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems()));
     }
   }]);
 
@@ -47524,7 +47509,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63661" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64784" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
