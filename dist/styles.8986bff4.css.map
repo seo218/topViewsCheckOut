@@ -1,1 +1,1 @@
-{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA","file":"styles.8986bff4.css","sourceRoot":"..\\src","sourcesContent":[""]}
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"styles.8986bff4.css","sourceRoot":"..\\src","sourcesContent":[".primary {\r\n  text-align: center;\r\n  padding: 4%\r\n}\r\n\r\n\r\n.carousel {\r\n  text-align: center;\r\n  padding: 10%;\r\n  background: aqua\r\n}"]}

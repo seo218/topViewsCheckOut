@@ -1,5 +1,7 @@
-//import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import ReservationPage from './components/reservationPage.js';
 
 
 
@@ -14,8 +16,9 @@ class App extends React.Component {
 
     render () {
         return (
-            <div>
-                hello world - this is a new line of code
+            <div className="primary">
+                {/* hello */}
+                <ReservationPage/>
             </div>
         )
     }

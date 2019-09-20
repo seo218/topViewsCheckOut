@@ -5,7 +5,7 @@
   "main": "instructions.js",
   "scripts": {
     "build": "parcel watch src/index.html",
-    "start": "nodemon src/index.js"
+    "start": "nodemon server/index.js"
   },
   "author": "",
   "license": "ISC",
