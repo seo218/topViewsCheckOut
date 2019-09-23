@@ -47386,8 +47386,17 @@ function (_React$Component) {
     _classCallCheck(this, ReservationPage);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ReservationPage).call(this, props));
-    _this.state = {};
+    _this.state = {
+      cartItems: [],
+      currentItem: {
+        name: "Select Product"
+      },
+      cartNumberOfItems: 0
+    };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
+    _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
+    _this.updateProductButton = _this.updateProductButton.bind(_assertThisInitialized(_this));
+    _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -47407,11 +47416,69 @@ function (_React$Component) {
       return items;
     }
   }, {
+    key: "getProductSelectionItems",
+    value: function getProductSelectionItems() {
+      var _this2 = this;
+
+      var items = [];
+
+      var _loop = function _loop(i) {
+        var productName = _bikerentals.products[i].name;
+        items.push(_react.default.createElement(_reactBootstrap.Dropdown.Item, {
+          href: "#/action-1",
+          onClick: function onClick() {
+            _this2.updateProductButton(_bikerentals.products[i]);
+          }
+        }, productName));
+      };
+
+      for (var i = 0; i < _bikerentals.products.length; i++) {
+        _loop(i);
+      }
+
+      return items;
+    }
+  }, {
+    key: "updateProductButton",
+    value: function updateProductButton(product) {
+      this.setState({
+        currentItem: product
+      });
+    }
+  }, {
+    key: "addToCart",
+    value: function addToCart() {
+      var newCart = this.state.cartItems;
+      newCart.push(this.state.currentItem);
+      this.setState({
+        cartItems: newCart
+      });
+      newCartNumberOfItmes = this.state.cartNumberOfItems++;
+      this.setState({
+        cartNumberOfItems: newCartNumberOfItmes
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       return _react.default.createElement("div", {
         className: "carousel"
-      }, _react.default.createElement("div", null, " ", console.log(this.getCarouselItems()), " "), _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems()));
+      }, _react.default.createElement("div", null, " ", console.log(this.state.cartItems), " "), _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems()), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
+        as: _reactBootstrap.Col,
+        controlId: "formGridEmail"
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Cart ( ", this.state.cartNumberOfItems, " Items )"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Dropdown, null, _react.default.createElement(_reactBootstrap.Dropdown.Toggle, {
+        variant: "success",
+        id: "dropdown-basic"
+      }, this.state.currentItem.name), _react.default.createElement(_reactBootstrap.Dropdown.Menu, null, this.getProductSelectionItems())), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: function onClick() {
+          _this3.addToCart();
+        }
+      }, "Add to Cart"), _react.default.createElement(_reactBootstrap.Form.Control, {
+        type: "email",
+        placeholder: "Enter email"
+      })))));
     }
   }]);
 
@@ -47509,7 +47576,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64784" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54401" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
