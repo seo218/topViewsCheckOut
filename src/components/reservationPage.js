@@ -7,7 +7,7 @@ class ReservationPage extends React.Component {
         super(props)
         this.state = {
             cartItems: [],
-            currentItem: {name:"Select Product"},
+            currentItem: { name: "Select Product" },
             cartNumberOfItems: 0
 
         }
@@ -22,7 +22,7 @@ class ReservationPage extends React.Component {
         for (let i = 0; i < products.length; i++) {
             items.push(
 
-                <Carousel.Item>
+                <Carousel.Item key={i}>
                     <img
                         className="d-block w-100"
                         src={products[i].image}
@@ -40,7 +40,7 @@ class ReservationPage extends React.Component {
     }
 
     getProductSelectionItems() {
-        let items =  []
+        let items = []
         for (let i = 0; i < products.length; i++) {
             let productName = products[i].name
             items.push(
@@ -49,6 +49,7 @@ class ReservationPage extends React.Component {
                     onClick={() => {
                         this.updateProductButton(products[i]);
                     }}
+                    key={i}
                 >
                     {productName}
                 </Dropdown.Item>
@@ -67,93 +68,51 @@ class ReservationPage extends React.Component {
         let newCart = this.state.cartItems
         newCart.push(this.state.currentItem)
         this.setState({
-            cartItems: newCart
+            cartItems: newCart,
+            cartNumberOfItems: this.state.cartItems.length
         })
-        newCartNumberOfItmes = this.state.cartNumberOfItems ++
-        this.setState({
-            cartNumberOfItems: newCartNumberOfItmes
-        })
-
     }
 
     render() {
         return (
-            <div className="carousel">
+            <div className="productSelectionPage">
                 {/* testing line */}
-                <div> {console.log(this.state.cartItems)} </div>
+                <div> {console.log(
+                    "printing cart items", this.state.cartItems,
+                    "printing current item", this.state.currentItem,
+                    "printing number of cart items", this.state.cartNumberOfItems
+                )} </div>
 
-                <Carousel>
-                    {this.getCarouselItems()}
-                </Carousel>
-                <div>
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridEmail">
-                            <Form.Label>Cart ( {this.state.cartNumberOfItems} Items )</Form.Label>
-                            <br></br>
-                            <Dropdown>
-                                <Dropdown.Toggle variant="success" id="dropdown-basic">
-                                    {this.state.currentItem.name}
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    {this.getProductSelectionItems()}
+                <div className="carousel">
+                    <Carousel>
+                        {this.getCarouselItems()}
+                    </Carousel>
+                </div>
 
-                                </Dropdown.Menu>
-                            </Dropdown>
-                            <br></br>
-                            <Button 
+                <div className="cart">
+                    <Form.Group as={Col} controlId="formGridEmail">
+                        <Form.Label>Cart ( {this.state.cartNumberOfItems} Items )</Form.Label>
+                        <br></br>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                {this.state.currentItem.name}
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                {this.getProductSelectionItems()}
+
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        <br></br>
+                        <Button
                             onClick={() => {
                                 this.addToCart();
                             }}
-                            >
-                                Add to Cart
+                        >
+                            Add to Cart
                             </Button>
-                            <Form.Control type="email" placeholder="Enter email" />
-                        </Form.Group>
-
-                        {/* <Form.Group as={Col} controlId="formGridPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
-                        </Form.Group> */}
-                    </Form.Row>
-
-                    {/* <Form.Group controlId="formGridAddress1">
-                        <Form.Label>Address</Form.Label>
-                        <Form.Control placeholder="1234 Main St" />
                     </Form.Group>
-
-                    <Form.Group controlId="formGridAddress2">
-                        <Form.Label>Address 2</Form.Label>
-                        <Form.Control placeholder="Apartment, studio, or floor" />
-                    </Form.Group>
-
-                    <Form.Row>
-                        <Form.Group as={Col} controlId="formGridCity">
-                            <Form.Label>City</Form.Label>
-                            <Form.Control />
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridState">
-                            <Form.Label>State</Form.Label>
-                            <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>...</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group as={Col} controlId="formGridZip">
-                            <Form.Label>Zip</Form.Label>
-                            <Form.Control />
-                        </Form.Group>
-                    </Form.Row>
-
-                    <Form.Group id="formGridCheckbox">
-                        <Form.Check type="checkbox" label="Check me out" />
-                    </Form.Group>
-
-                    <Button variant="primary" type="submit">
-                        Submit
-  </Button> */}
                 </div>
+
             </div>
         )
     }

@@ -47406,7 +47406,9 @@ function (_React$Component) {
       var items = [];
 
       for (var i = 0; i < _bikerentals.products.length; i++) {
-        items.push(_react.default.createElement(_reactBootstrap.Carousel.Item, null, _react.default.createElement("img", {
+        items.push(_react.default.createElement(_reactBootstrap.Carousel.Item, {
+          key: i
+        }, _react.default.createElement("img", {
           className: "d-block w-100",
           src: _bikerentals.products[i].image,
           alt: "slide "
@@ -47428,7 +47430,8 @@ function (_React$Component) {
           href: "#/action-1",
           onClick: function onClick() {
             _this2.updateProductButton(_bikerentals.products[i]);
-          }
+          },
+          key: i
         }, productName));
       };
 
@@ -47451,11 +47454,8 @@ function (_React$Component) {
       var newCart = this.state.cartItems;
       newCart.push(this.state.currentItem);
       this.setState({
-        cartItems: newCart
-      });
-      newCartNumberOfItmes = this.state.cartNumberOfItems++;
-      this.setState({
-        cartNumberOfItems: newCartNumberOfItmes
+        cartItems: newCart,
+        cartNumberOfItems: this.state.cartItems.length
       });
     }
   }, {
@@ -47464,8 +47464,12 @@ function (_React$Component) {
       var _this3 = this;
 
       return _react.default.createElement("div", {
+        className: "productSelectionPage"
+      }, _react.default.createElement("div", null, " ", console.log("printing cart items", this.state.cartItems, "printing current item", this.state.currentItem, "printing number of cart items", this.state.cartNumberOfItems), " "), _react.default.createElement("div", {
         className: "carousel"
-      }, _react.default.createElement("div", null, " ", console.log(this.state.cartItems), " "), _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems()), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
+      }, _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems())), _react.default.createElement("div", {
+        className: "cart"
+      }, _react.default.createElement(_reactBootstrap.Form.Group, {
         as: _reactBootstrap.Col,
         controlId: "formGridEmail"
       }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Cart ( ", this.state.cartNumberOfItems, " Items )"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Dropdown, null, _react.default.createElement(_reactBootstrap.Dropdown.Toggle, {
@@ -47475,10 +47479,7 @@ function (_React$Component) {
         onClick: function onClick() {
           _this3.addToCart();
         }
-      }, "Add to Cart"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        type: "email",
-        placeholder: "Enter email"
-      })))));
+      }, "Add to Cart"))));
     }
   }]);
 

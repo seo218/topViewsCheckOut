@@ -3,10 +3,21 @@
   padding: 4%
 }
 
+.productSelectionPage {
+  text-align: center;
+  padding: 3%;
+  background: aqua;
+  color: black
+}
 
 .carousel {
   text-align: center;
   padding: 3%;
   background: aqua;
   color: black
+}
+
+.cart {
+  text-align: left;
+  padding: 2%
 }
