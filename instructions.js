@@ -10,7 +10,8 @@
     
 // Please think about how a checkout process usually is and make the checkout experience as smooth as possible.
 
-// Users cannot check out with accessories or add-ons only - they must come with a bike selection.
+// Users cannot check out with accessories or add-ons only - 
+// they must come with a bike selection.
 
 // The content displayed should be responsive for mobile and desktop. Be mindful of element sizes and alignment.
 
