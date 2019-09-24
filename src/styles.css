@@ -6,15 +6,15 @@
 .productSelectionPage {
   text-align: center;
   padding: 3%;
-  background: aqua;
-  color: black
+  background:black;
+  color: aquamarine
 }
 
 .carousel {
   text-align: center;
   padding: 3%;
-  background: aqua;
-  color: black
+  background: blue;
+  color: red
 }
 
 .cart {
@@ -23,9 +23,13 @@
 }
 
 .addToCart {
-  padding: 2%
+  padding: 2%;
 } 
 
 .cartDisplay {
   padding: 2%
+}
+
+.numberOfItemsInput {
+  width: 35%;
 }

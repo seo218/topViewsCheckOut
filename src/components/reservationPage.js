@@ -1,6 +1,6 @@
 import React from 'react'
 import { products } from '../../database/bikerentals.js'
-import { Carousel, Form, Col, Button, Dropdown, Row, FormLabel, Figure, ListGroup } from 'react-bootstrap'
+import { Carousel, Form, Col, Button, Dropdown, Row, FormLabel, Figure, ListGroup, InputGroup, FormControl } from 'react-bootstrap'
 import Promise from 'bluebird'
 
 class ReservationPage extends React.Component {
@@ -82,21 +82,21 @@ class ReservationPage extends React.Component {
             })
         }
         stateUpdate()
-            // .then(() => {
-                
-            //     // console.log("printing cart items state", this.state.cartItems)
-            //     // this.getCartDisplayItems
-            //     // this.setState({
-            //     //     cartDisplay: this.getCartDisplayItems()
-            //     // })
-            // })
-            // .catch(() => {
-            //     console.log('notworking')
-            // })
+        // .then(() => {
+
+        //     // console.log("printing cart items state", this.state.cartItems)
+        //     // this.getCartDisplayItems
+        //     // this.setState({
+        //     //     cartDisplay: this.getCartDisplayItems()
+        //     // })
+        // })
+        // .catch(() => {
+        //     console.log('notworking')
+        // })
     }
 
     removeItemfromCart(itemIndx) {
-        let newCart = this.state.cartItems 
+        let newCart = this.state.cartItems
         newCart.splice(itemIndx, 1)
         console.log('printing new cart', newCart)
         let stateUpdate = () => {
@@ -110,12 +110,12 @@ class ReservationPage extends React.Component {
             })
         }
         stateUpdate()
-        .then(() => {
-            this.getCartDisplayItems()
-        })
-        .catch(() => {
-            console.log('remove item from cart not working')
-        })
+            .then(() => {
+                this.getCartDisplayItems()
+            })
+            .catch(() => {
+                console.log('remove item from cart not working')
+            })
     }
 
     getCartDisplayItems() {
@@ -136,12 +136,12 @@ class ReservationPage extends React.Component {
             )
             items.push(<br></br>)
             items.push(
-                <Button 
-                    key={i} 
-                    variant="danger" 
-                    onClick={()=> {
+                <Button
+                    key={i}
+                    variant="danger"
+                    onClick={() => {
                         this.removeItemfromCart(i)
-                        }}
+                    }}
                 >
                     remove
                 </Button>
@@ -186,6 +186,18 @@ class ReservationPage extends React.Component {
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 <br></br>
+                                <div className="numberOfItemsInput">
+                                <InputGroup>
+
+                                    <FormControl
+                                        placeholder="number of items"
+                                        width="5"
+                                    >
+                                    </FormControl>
+                                </InputGroup>
+
+                                </div>
+                                <br></br>
                                 <Button
                                     onClick={() => {
                                         this.addToCart();
@@ -193,6 +205,11 @@ class ReservationPage extends React.Component {
                                 >
                                     Add to Cart
                         </Button>
+                                <br></br>
+                                <br></br>
+                                <Button>
+                                    Checkout
+                                    </Button>
                             </Col>
                             <Col className="cartDisplay">
                                 <div>Current Items</div>

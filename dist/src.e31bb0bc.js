@@ -53433,11 +53433,16 @@ function (_React$Component) {
       }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Cart ( ", this.state.cartNumberOfItems, " Items )"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Dropdown, null, _react.default.createElement(_reactBootstrap.Dropdown.Toggle, {
         variant: "success",
         id: "dropdown-basic"
-      }, this.state.currentItem.name), _react.default.createElement(_reactBootstrap.Dropdown.Menu, null, this.getProductSelectionItems())), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
+      }, this.state.currentItem.name), _react.default.createElement(_reactBootstrap.Dropdown.Menu, null, this.getProductSelectionItems())), _react.default.createElement("br", null), _react.default.createElement("div", {
+        className: "numberOfItemsInput"
+      }, _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        placeholder: "number of items",
+        width: "5"
+      }))), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
           _this6.addToCart();
         }
-      }, "Add to Cart")), _react.default.createElement(_reactBootstrap.Col, {
+      }, "Add to Cart"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, null, "Checkout")), _react.default.createElement(_reactBootstrap.Col, {
         className: "cartDisplay"
       }, _react.default.createElement("div", null, "Current Items"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Figure, null, this.getCartDisplayItems()))))));
     }
@@ -53537,7 +53542,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59421" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60008" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
