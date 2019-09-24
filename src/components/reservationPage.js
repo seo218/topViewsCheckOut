@@ -9,14 +9,14 @@ class ReservationPage extends React.Component {
         this.state = {
             cartItems: [],
             currentItem: { name: "Select Product" },
-            cartNumberOfItems: 0,
-            cartDisplay: []
+            cartNumberOfItems: 0
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
         this.getProductSelectionItems = this.getProductSelectionItems.bind(this)
         this.updateProductButton = this.updateProductButton.bind(this)
         this.addToCart = this.addToCart.bind(this)
         this.getCartDisplayItems = this.getCartDisplayItems.bind(this)
+        this.removeItemfromCart = this.removeItemfromCart.bind(this)
     }
 
     getCarouselItems() {
@@ -69,34 +69,57 @@ class ReservationPage extends React.Component {
     addToCart() {
         let newCart = this.state.cartItems
         newCart.push(this.state.currentItem)
+        // do you need async here?
         let stateUpdate = () => {
             return new Promise((resolve, reject) => {
                 resolve(
                     this.setState({
                         cartItems: newCart,
-                        cartNumberOfItems: this.state.cartItems.length,
+                        cartNumberOfItems: this.state.cartItems.length
                     })
                 )
 
             })
         }
         stateUpdate()
-            .then(() => {
-                // console.log("printing cart items state", this.state.cartItems)
-                this.getCarouselItems()
-                // this.setState({
-                //     cartDisplay: this.getCartDisplayItems()
-                // })
-            })
-            .catch(() => {
-                console.log('notworking')
-            })
+            // .then(() => {
+                
+            //     // console.log("printing cart items state", this.state.cartItems)
+            //     // this.getCartDisplayItems
+            //     // this.setState({
+            //     //     cartDisplay: this.getCartDisplayItems()
+            //     // })
+            // })
+            // .catch(() => {
+            //     console.log('notworking')
+            // })
+    }
 
+    removeItemfromCart(itemIndx) {
+        let newCart = this.state.cartItems 
+        newCart.splice(itemIndx, 1)
+        console.log('printing new cart', newCart)
+        let stateUpdate = () => {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    this.setState({
+                        cartItems: newCart,
+                        cartNumberOfItems: this.state.cartItems.length
+                    })
+                )
+            })
+        }
+        stateUpdate()
+        .then(() => {
+            this.getCartDisplayItems()
+        })
+        .catch(() => {
+            console.log('remove item from cart not working')
+        })
     }
 
     getCartDisplayItems() {
         let items = []
-        // console.log('printing state cart items', this.state.cartItems[1].name)
         for (let i = 0; i < this.state.cartItems.length; i++) {
             items.push(
                 <Figure.Image
@@ -112,8 +135,21 @@ class ReservationPage extends React.Component {
                 </Figure.Caption>
             )
             items.push(<br></br>)
+            items.push(
+                <Button 
+                    key={i} 
+                    variant="danger" 
+                    onClick={()=> {
+                        this.removeItemfromCart(i)
+                        }}
+                >
+                    remove
+                </Button>
+            )
+            items.push(<br></br>)
+            items.push(<br></br>)
+            items.push(<br></br>)
         }
-        console.log("printing item array in getCartDisplay  items", items)
         return items
     }
 

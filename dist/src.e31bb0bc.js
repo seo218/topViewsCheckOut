@@ -53272,14 +53272,14 @@ function (_React$Component) {
       currentItem: {
         name: "Select Product"
       },
-      cartNumberOfItems: 0,
-      cartDisplay: []
+      cartNumberOfItems: 0
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
     _this.updateProductButton = _this.updateProductButton.bind(_assertThisInitialized(_this));
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     _this.getCartDisplayItems = _this.getCartDisplayItems.bind(_assertThisInitialized(_this));
+    _this.removeItemfromCart = _this.removeItemfromCart.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -53337,7 +53337,7 @@ function (_React$Component) {
       var _this3 = this;
 
       var newCart = this.state.cartItems;
-      newCart.push(this.state.currentItem);
+      newCart.push(this.state.currentItem); // do you need async here?
 
       var stateUpdate = function stateUpdate() {
         return new _bluebird.default(function (resolve, reject) {
@@ -53348,39 +53348,79 @@ function (_React$Component) {
         });
       };
 
-      stateUpdate().then(function () {
-        // console.log("printing cart items state", this.state.cartItems)
-        _this3.getCarouselItems(); // this.setState({
-        //     cartDisplay: this.getCartDisplayItems()
-        // })
+      stateUpdate(); // .then(() => {
+      //     // console.log("printing cart items state", this.state.cartItems)
+      //     // this.getCartDisplayItems
+      //     // this.setState({
+      //     //     cartDisplay: this.getCartDisplayItems()
+      //     // })
+      // })
+      // .catch(() => {
+      //     console.log('notworking')
+      // })
+    }
+  }, {
+    key: "removeItemfromCart",
+    value: function removeItemfromCart(itemIndx) {
+      var _this4 = this;
 
+      var newCart = this.state.cartItems;
+      newCart.splice(itemIndx, 1);
+      console.log('printing new cart', newCart);
+
+      var stateUpdate = function stateUpdate() {
+        return new _bluebird.default(function (resolve, reject) {
+          resolve(_this4.setState({
+            cartItems: newCart,
+            cartNumberOfItems: _this4.state.cartItems.length
+          }));
+        });
+      };
+
+      stateUpdate().then(function () {
+        _this4.getCartDisplayItems();
       }).catch(function () {
-        console.log('notworking');
+        console.log('remove item from cart not working');
       });
     }
   }, {
     key: "getCartDisplayItems",
     value: function getCartDisplayItems() {
-      var items = []; // console.log('printing state cart items', this.state.cartItems[1].name)
+      var _this5 = this;
 
-      for (var i = 0; i < this.state.cartItems.length; i++) {
+      var items = [];
+
+      var _loop2 = function _loop2(i) {
         items.push(_react.default.createElement(_reactBootstrap.Figure.Image, {
           width: 171,
           height: 180,
           alt: "171x180",
-          src: this.state.cartItems[i].image
+          src: _this5.state.cartItems[i].image
         }));
-        items.push(_react.default.createElement(_reactBootstrap.Figure.Caption, null, "$", this.state.cartItems[i].price.toFixed(2), " ", this.state.cartItems[i].name));
+        items.push(_react.default.createElement(_reactBootstrap.Figure.Caption, null, "$", _this5.state.cartItems[i].price.toFixed(2), " ", _this5.state.cartItems[i].name));
         items.push(_react.default.createElement("br", null));
+        items.push(_react.default.createElement(_reactBootstrap.Button, {
+          key: i,
+          variant: "danger",
+          onClick: function onClick() {
+            _this5.removeItemfromCart(i);
+          }
+        }, "remove"));
+        items.push(_react.default.createElement("br", null));
+        items.push(_react.default.createElement("br", null));
+        items.push(_react.default.createElement("br", null));
+      };
+
+      for (var i = 0; i < this.state.cartItems.length; i++) {
+        _loop2(i);
       }
 
-      console.log("printing item array in getCartDisplay  items", items);
       return items;
     }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this6 = this;
 
       return _react.default.createElement("div", {
         className: "productSelectionPage"
@@ -53395,7 +53435,7 @@ function (_React$Component) {
         id: "dropdown-basic"
       }, this.state.currentItem.name), _react.default.createElement(_reactBootstrap.Dropdown.Menu, null, this.getProductSelectionItems())), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
-          _this4.addToCart();
+          _this6.addToCart();
         }
       }, "Add to Cart")), _react.default.createElement(_reactBootstrap.Col, {
         className: "cartDisplay"
@@ -53497,7 +53537,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64890" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59421" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
