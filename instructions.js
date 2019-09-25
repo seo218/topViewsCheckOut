@@ -1,4 +1,6 @@
-// We’d like you to develop a simple product reservation page for bike rentals. Please use the attached JSON data, and provide the user with the option to rent bikes. The test should not take more than 2 hours to complete. Requirements:
+// We’d like you to develop a simple product reservation page for bike rentals. 
+//Please use the attached JSON data, and provide the user with the option to rent bikes. 
+//The test should not take more than 2 hours to complete. Requirements:
 
 // You have the option to use any technologies available to you, or simple HTML, CSS, and JS.
 
@@ -19,6 +21,5 @@
 
 // Provide access to the see the code and a live demo link to see the page working.
 
-// Please return your test within 7 days of this email.
 
  
