@@ -42,3 +42,8 @@
   border-top-right-radius:5px;
   border-top-left-radius:5px;
    }
+
+   .emptyCart {
+     position: relative;
+     text-align: center
+   }

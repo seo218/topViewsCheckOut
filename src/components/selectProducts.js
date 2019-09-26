@@ -13,6 +13,7 @@ class SelectProducts extends React.Component {
             numberOfItems: 0,
             quantity: undefined,
             selectProducts: null,
+            totalPrice: `$${0}`
 
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
@@ -20,6 +21,7 @@ class SelectProducts extends React.Component {
         this.updateProductButton = this.updateProductButton.bind(this)
         this.addToCart = this.addToCart.bind(this)
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
+        this.updateTotal = this.updateTotal.bind(this)
     }
 
     getCarouselItems() {
@@ -104,7 +106,8 @@ class SelectProducts extends React.Component {
                 }
                 this.setState({
                     items: newItems,
-                    numberOfItems: numberOfItems
+                    numberOfItems: numberOfItems,
+                    totalPrice: this.updateTotal()
                 })
 
             }
@@ -122,6 +125,18 @@ class SelectProducts extends React.Component {
         }
     }
 
+    updateTotal() {
+        if(this.state.items === undefined || this.state.items.length === 0) {
+          console.log('cart is empty')
+        } else {
+          let total = 0
+          let cart = this.state.items
+          for(let i = 0; i < cart.length; i ++) {
+            total += (cart[i].price * cart[i].quantity)
+          }
+          return `$${total.toFixed(2)}`
+        }
+      }
 
     render() {
         return (
@@ -174,7 +189,10 @@ class SelectProducts extends React.Component {
                 </div>
                 <br></br>
                 <div className="reservationReview">
-                    <ReviewReservation cart={this.state.items} />
+                    <ReviewReservation 
+                    cart={this.state.items} 
+                    total={this.state.totalPrice}
+                    />
                 </div>
             </div>
         )

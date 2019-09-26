@@ -1,18 +1,20 @@
 import React from 'react'
 import { products } from '../../database/bikerentals.js'
-import { Table, Tab, Button, Row, Col } from 'react-bootstrap'
+import { Table, Popover, OverlayTrigger } from 'react-bootstrap'
 import Promise from 'bluebird'
+import { PassThrough } from 'stream'
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants'
 
 class ReviewReservation extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-
     }
     this.getCartDisplayItems = this.getCartDisplayItems.bind(this)
     this.removeItemfromCart = this.removeItemfromCart.bind(this)
     this.renderCart = this.renderCart.bind(this)
-
+    this.updateTotal = this.updateTotal.bind(this)
+    // this.sortCart = this.sortCart.bind(this)
   }
 
   removeItemfromCart(itemIndx) {
@@ -86,50 +88,75 @@ class ReviewReservation extends React.Component {
     //     })
   }
 
+
+  sortCart () {
+  //   let sortedCart = []
+  //   let cart = this.props.cart
+  //   for (let i = 0; i < cart.length; i++) {
+  //     // console.log('printing inside loop 1', cart[i].name, cartToRender)
+  //     if (sortedCart.length === 0) {
+  //       cart[0].totaled = false
+  //       sortedCart.push(cart[0])
+  //     } else {
+  //       if (!sortedCart.includes(cart[i])) {
+  //         cart[i].totaled = false
+  //         sortedCart.push(cart[i])
+  //       }
+  //     }
+  // }
+  // // console.log(sortedCart)
+  // return sortedCart
+}
+
   renderCart() {
-    let cartToRender = []
-    let cart = this.props.cart
-    console.log('pringting cart in rendercart', cart)
-    if (cart === undefined || cart.length === 0) {
+    if(this.props.cart === undefined) {
       return (
-        <div>
-          cart is empty
+        <div className="emptyCart">
+          needs to be centered
         </div>
       )
     } else {
-      // loop through cart
-      for (let i = 0; i < cart.length; i++) {
-        // console.log('printing inside loop 1', cart[i].name, cartToRender)
-        if (cartToRender.length === 0) {
-          cartToRender.push(cart[0])
-        } else {
-          if (!cartToRender.includes(cart[i])) {
-            cartToRender.push(cart[i])
-          }
-        }
+      const popover = (
+        <Popover id="popover-basic">
+          <Popover.Title as="h3">click to remove from cart</Popover.Title>
+        </Popover>
+      );
+      
+      let cart = this.props.cart
+      // console.log(cart)
+      let cartArray = []
+      for(let i = 0; i < cart.length; i ++) {
+        cartArray.push(
+          <OverlayTrigger trigger="hover" placement="right" overlay={popover}>
+          <tr>
+          <td>{cart[i].name}</td>
+          <td>${cart[i].price.toFixed(2)}</td>
+          <td>{cart[i].quantity}</td>
+          <td>{cart[i].product_type}</td>
+        </tr>
+    
+         </OverlayTrigger> 
+        )
       }
-      for (let i = 0; i < cartToRender.length; i++) {
-        cart[i].totaled = false
-      }
-      // start here - totals first item but wont total following items
-      for (let i = 0; i < cart.length; i++) {
-        let totalQuantity = cart[i].quantity
-        for (let j = i + 1; j < cart.length; j++) {
-          if (cart[i].name === cart[j].name) {
-            totalQuantity += cart[j].quantity
-          }
-        }
-        for (let j = 0; j < cartToRender.length; j++) {
-          if (cartToRender[j].name === cart[i].name && cart[j].totaled === false) {
-            cartToRender[j].quantity = totalQuantity
-            cartToRender[j].totaled = true
-          }
-        }
-
-      }
+      return cartArray
     }
-    console.log('printing cart to render', cartToRender)
+}
+
+updateTotal() {
+  if(this.props.cart === undefined) {
+    console.log('cart is empty')
+  } else {
+    total = 0
+    cart = this.props.cart
+    for(let i = 0; i < cart.length; i ++) {
+      total += (cart[i].price * cart[i].quantity)
+    }
+    // this.setState({
+    //   total: total
+    // })
+    console.log('printing total', total)
   }
+}
 
   render() {
     return (
@@ -138,40 +165,28 @@ class ReviewReservation extends React.Component {
           Cart
             </h1>
         <br></br>
-        <Button onClick={() => { this.renderCart() }}>
+        {/* <Button onClick={() => { }}>
           refresh cart
-            </Button>
+            </Button> */}
+        {/* <br></br>
         <br></br>
-        <br></br>
-        <br></br>
+        <br></br> */}
         <Table variant="dark" >
           <thead>
             <tr>
-              <th>#</th>
               <th>Product</th>
               <th>Price</th>
               <th>Quantity</th>
               <th>Product type</th>
-              <th>Total</th>
             </tr>
           </thead>
           <tbody>
+            {this.renderCart()}
             <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td colSpan="2">Larry the Bird</td>
-              <td>@twitter</td>
+            <th>Total</th>
+            <th></th>
+            <th></th>
+            <th>{this.props.total}</th>
             </tr>
           </tbody>
         </Table>

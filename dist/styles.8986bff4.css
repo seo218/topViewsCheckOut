@@ -43,5 +43,9 @@
   border-top-left-radius:5px;
    }
 
+   .emptyCart {
+     position: relative;
+     text-align: center
+   }
 
 /*# sourceMappingURL=/styles.8986bff4.css.map */
