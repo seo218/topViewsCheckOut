@@ -3,7 +3,7 @@ import { products } from '../../database/bikerentals.js'
 import { Carousel, Form, Col, Button, Dropdown, Row, FormLabel, Figure, ListGroup, InputGroup, FormControl, ToggleButtonGroup } from 'react-bootstrap'
 import Promise from 'bluebird'
 
-class ReservationPage extends React.Component {
+class ReviewReservation extends React.Component {
   constructor(props) {
       super(props)
       this.state = {
@@ -13,10 +13,10 @@ class ReservationPage extends React.Component {
     render () {
       return (
         <div>
-          
+          viewing reseration
         </div>
       )
     }
   }
 
-  export default ReservationPage
+  export default ReviewReservation

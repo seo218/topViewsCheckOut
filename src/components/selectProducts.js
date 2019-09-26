@@ -2,10 +2,8 @@ import React from 'react'
 import { products } from '../../database/bikerentals.js'
 import { Carousel, Form, Col, Button, Dropdown, Row, FormLabel, Figure, ListGroup, InputGroup, FormControl, ToggleButtonGroup } from 'react-bootstrap'
 import Promise from 'bluebird'
-import { rejects } from 'assert'
-import { networkInterfaces } from 'os'
 
-class ReservationPage extends React.Component {
+class SelectProducts extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -75,33 +73,42 @@ class ReservationPage extends React.Component {
             console.log('no product selected')
         } else {
             if (this.state.items === undefined) {
-                let newCart = this.state.currentItem
+                let items = this.state.currentItem
                 if (this.state.quantity === undefined) {
-                    newCart.quantity = 1
+                    items.quantity = 1
                 } else {
-                    newCart.quantity = this.state.quantity
+                    items.quantity = this.state.quantity
                 }
-                let newCartArray = []
-                newCartArray.push(newCart)
+                let newItemsArray = []
+                newItemsArray.push(items)
                 this.setState({
-                    items: newCartArray
+                    items: newItemsArray,
+                    numberOfItems: items.quantity
                 })
             } else {
-                let itemToAddToCart = this.state.currentItem
+                // bug is here 
+                // quantity resets to state quantity 
+                // if item in items array are the same as state current item
+                let itemToAdd = this.state.currentItem
                 if (this.state.quantity === undefined) {
-                    itemToAddToCart.quantity = 1
+                    itemToAdd.quantity = 1
                 } else {
-                    itemToAddToCart.quantity = this.state.quantity
+                    itemToAdd.quantity = this.state.quantity
                 }
-                let newCart = this.state.items
-                newCart.push(itemToAddToCart)
+                let newItems = this.state.items
+                newItems.push(itemToAdd)
+                let numberOfItems = 0
+                for(let i = 0; i < newItems.length; i ++) {
+                    numberOfItems += parseInt(newItems[i].quantity)
+                }
                 this.setState({
-                    items: newCart
+                    items: newItems,
+                    numberOfItems: numberOfItems
                 })
 
             }
         }
-        console.log(this.state.items)
+        console.log(this.state.items, this.state.numberOfItems)
     }
 
     removeItemfromCart(itemIndx) {
@@ -176,6 +183,7 @@ class ReservationPage extends React.Component {
     handleQuantityChange() {
         let quantity = event.target.value
         if (quantity > 0 && quantity % 1 === 0) {
+            // console.log(this.state.quantity)
             this.setState({
                 quantity: quantity
             })
@@ -215,17 +223,15 @@ class ReservationPage extends React.Component {
                                     </Dropdown.Menu>
                                 </Dropdown>
                                 <br></br>
-                                <div className="numberOfItemsInput">
-                                    <InputGroup>
-
-                                        <FormControl
+                                <div>
+                                    <span>
+                                        <input
                                             placeholder="number of items"
-                                            width="5"
+                                            className="round"
                                             onChange={this.handleQuantityChange}
                                         >
-                                        </FormControl>
-                                    </InputGroup>
-
+                                        </input>
+                                    </span>
                                 </div>
                                 <br></br>
                                 <Button
@@ -237,17 +243,17 @@ class ReservationPage extends React.Component {
                         </Button>
                                 <br></br>
                                 <br></br>
-                                <Button>
-                                    Checkout
+                                <Button onCLick={() =>{}}> 
+                                    View Cart
                                     </Button>
                             </Col>
-                            <Col className="cartDisplay">
+                            {/* <Col className="cartDisplay">
                                 <div>Current Items</div>
                                 <br></br>
                                 <Figure>
-                                    {/* {this.getCartDisplayItems()} */}
+                                    {this.getCartDisplayItems()}
                                 </Figure>
-                            </Col>
+                            </Col> */}
                         </Row>
                     </Form>
                 </div>
@@ -257,4 +263,4 @@ class ReservationPage extends React.Component {
     }
 }
 
-export default ReservationPage
+export default SelectProducts
