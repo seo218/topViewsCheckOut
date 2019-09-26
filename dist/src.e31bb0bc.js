@@ -53220,7 +53220,7 @@ module.exports = ret;
 
 },{"./es5":13}]},{},[4])(4)
 });                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-},{"process":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"components/selectProducts.js":[function(require,module,exports) {
+},{"process":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/node_modules/process/browser.js"}],"components/reviewReservation.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53235,6 +53235,201 @@ var _bikerentals = require("../../database/bikerentals.js");
 var _reactBootstrap = require("react-bootstrap");
 
 var _bluebird = _interopRequireDefault(require("bluebird"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var ReviewReservation =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ReviewReservation, _React$Component);
+
+  function ReviewReservation(props) {
+    var _this;
+
+    _classCallCheck(this, ReviewReservation);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReviewReservation).call(this, props));
+    _this.state = {};
+    _this.getCartDisplayItems = _this.getCartDisplayItems.bind(_assertThisInitialized(_this));
+    _this.removeItemfromCart = _this.removeItemfromCart.bind(_assertThisInitialized(_this));
+    _this.renderCart = _this.renderCart.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(ReviewReservation, [{
+    key: "removeItemfromCart",
+    value: function removeItemfromCart(itemIndx) {
+      var _this2 = this;
+
+      var newCart = this.state.items;
+      newCart.splice(itemIndx, 1); // console.log('printing new cart', newCart)
+
+      var stateUpdate = function stateUpdate() {
+        return new _bluebird.default(function (resolve, reject) {
+          resolve(_this2.setState({
+            items: newCart,
+            numberOfItems: _this2.state.items.length
+          }));
+        });
+      };
+    }
+  }, {
+    key: "getCartDisplayItems",
+    value: function getCartDisplayItems() {
+      // if (this.state.currentItem.name === "Select Product") {
+      //     return ""
+      // } else {
+      // console.log(this.state.items)
+      // let items = []
+      // console.log(this.state.items.length)
+      // for (let i = 0; i < this.state.items.length; i++) {
+      //     console.log(this.state.items.length)
+      //     for (let j = 0; j < this.setState.items[i].quantity; j++) {
+      //         items.push(
+      //             <Figure.Image
+      //                 width={171}
+      //                 height={180}
+      //                 alt="171x180"
+      //                 src={this.state.items[i].image}
+      //             />
+      //         )
+      //         items.push(
+      //             <Figure.Caption>
+      //                 ${this.state.items[i].price.toFixed(2)} {this.state.items[i].name}
+      //             </Figure.Caption>
+      //         )
+      //         items.push(<br></br>)
+      //         items.push(
+      //             <Button
+      //                 key={i}
+      //                 variant="danger"
+      //                 onClick={() => {
+      //                     this.removeItemfromCart(i)
+      //                 }}
+      //             >
+      //                 remove
+      //                       </Button>
+      //         )
+      //         items.push(<br></br>)
+      //         items.push(<br></br>)
+      //         items.push(<br></br>)
+      //     }
+      // }
+      // console.log(items)
+      // return items
+      // }
+      // }
+      stateUpdate(); //     .then(() => {
+      //         this.getCartDisplayItems()
+      //     })
+      //     .catch(() => {
+      //         console.log('remove item from cart not working')
+      //     })
+    }
+  }, {
+    key: "renderCart",
+    value: function renderCart() {
+      var cartToRender = [];
+      var cart = this.props.cart;
+      console.log('pringting cart in rendercart', cart);
+
+      if (cart === undefined || cart.length === 0) {
+        return _react.default.createElement("div", null, "cart is empty");
+      } else {
+        // loop through cart
+        for (var i = 0; i < cart.length; i++) {
+          // console.log('printing inside loop 1', cart[i].name, cartToRender)
+          if (cartToRender.length === 0) {
+            cartToRender.push(cart[0]);
+          } else {
+            if (!cartToRender.includes(cart[i])) {
+              cartToRender.push(cart[i]);
+            }
+          }
+        }
+
+        for (var _i = 0; _i < cartToRender.length; _i++) {
+          cart[_i].totaled = false;
+        } // start here - totals first item but wont total following items
+
+
+        for (var _i2 = 0; _i2 < cart.length; _i2++) {
+          var totalQuantity = cart[_i2].quantity;
+
+          for (var j = _i2 + 1; j < cart.length; j++) {
+            if (cart[_i2].name === cart[j].name) {
+              totalQuantity += cart[j].quantity;
+            }
+          }
+
+          for (var _j = 0; _j < cartToRender.length; _j++) {
+            if (cartToRender[_j].name === cart[_i2].name && cart[_j].totaled === false) {
+              cartToRender[_j].quantity = totalQuantity;
+              cartToRender[_j].totaled = true;
+            }
+          }
+        }
+      }
+
+      console.log('printing cart to render', cartToRender);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      return _react.default.createElement("div", {
+        className: "reviewReservation"
+      }, _react.default.createElement("h1", null, "Cart"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: function onClick() {
+          _this3.renderCart();
+        }
+      }, "refresh cart"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Table, {
+        variant: "dark"
+      }, _react.default.createElement("thead", null, _react.default.createElement("tr", null, _react.default.createElement("th", null, "#"), _react.default.createElement("th", null, "Product"), _react.default.createElement("th", null, "Price"), _react.default.createElement("th", null, "Quantity"), _react.default.createElement("th", null, "Product type"), _react.default.createElement("th", null, "Total"))), _react.default.createElement("tbody", null, _react.default.createElement("tr", null, _react.default.createElement("td", null, "1"), _react.default.createElement("td", null, "Mark"), _react.default.createElement("td", null, "Otto"), _react.default.createElement("td", null, "@mdo")), _react.default.createElement("tr", null, _react.default.createElement("td", null, "2"), _react.default.createElement("td", null, "Jacob"), _react.default.createElement("td", null, "Thornton"), _react.default.createElement("td", null, "@fat")), _react.default.createElement("tr", null, _react.default.createElement("td", null, "3"), _react.default.createElement("td", {
+        colSpan: "2"
+      }, "Larry the Bird"), _react.default.createElement("td", null, "@twitter")))));
+    }
+  }]);
+
+  return ReviewReservation;
+}(_react.default.Component);
+
+var _default = ReviewReservation;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","bluebird":"../node_modules/bluebird/js/browser/bluebird.js"}],"components/selectProducts.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _bikerentals = require("../../database/bikerentals.js");
+
+var _reactBootstrap = require("react-bootstrap");
+
+var _reviewReservation = _interopRequireDefault(require("./reviewReservation.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53273,14 +53468,13 @@ function (_React$Component) {
         name: "Select Product"
       },
       numberOfItems: 0,
-      quantity: undefined
+      quantity: undefined,
+      selectProducts: null
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
     _this.updateProductButton = _this.updateProductButton.bind(_assertThisInitialized(_this));
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
-    _this.getCartDisplayItems = _this.getCartDisplayItems.bind(_assertThisInitialized(_this));
-    _this.removeItemfromCart = _this.removeItemfromCart.bind(_assertThisInitialized(_this));
     _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -53379,78 +53573,8 @@ function (_React$Component) {
             numberOfItems: numberOfItems
           });
         }
-      }
+      } // console.log(this.state.items, this.state.numberOfItems)
 
-      console.log(this.state.items, this.state.numberOfItems);
-    }
-  }, {
-    key: "removeItemfromCart",
-    value: function removeItemfromCart(itemIndx) {
-      var _this3 = this;
-
-      var newCart = this.state.items;
-      newCart.splice(itemIndx, 1); // console.log('printing new cart', newCart)
-
-      var stateUpdate = function stateUpdate() {
-        return new _bluebird.default(function (resolve, reject) {
-          resolve(_this3.setState({
-            items: newCart,
-            numberOfItems: _this3.state.items.length
-          }));
-        });
-      };
-
-      stateUpdate(); //     .then(() => {
-      //         this.getCartDisplayItems()
-      //     })
-      //     .catch(() => {
-      //         console.log('remove item from cart not working')
-      //     })
-    }
-  }, {
-    key: "getCartDisplayItems",
-    value: function getCartDisplayItems() {
-      if (this.state.currentItem.name === "Select Product") {
-        return "";
-      } else {
-        // console.log(this.state.items)
-        var items = []; // console.log(this.state.items.length)
-        // for (let i = 0; i < this.state.items.length; i++) {
-        //     console.log(this.state.items.length)
-        //     for (let j = 0; j < this.setState.items[i].quantity; j++) {
-        //         items.push(
-        //             <Figure.Image
-        //                 width={171}
-        //                 height={180}
-        //                 alt="171x180"
-        //                 src={this.state.items[i].image}
-        //             />
-        //         )
-        //         items.push(
-        //             <Figure.Caption>
-        //                 ${this.state.items[i].price.toFixed(2)} {this.state.items[i].name}
-        //             </Figure.Caption>
-        //         )
-        //         items.push(<br></br>)
-        //         items.push(
-        //             <Button
-        //                 key={i}
-        //                 variant="danger"
-        //                 onClick={() => {
-        //                     this.removeItemfromCart(i)
-        //                 }}
-        //             >
-        //                 remove
-        //                       </Button>
-        //         )
-        //         items.push(<br></br>)
-        //         items.push(<br></br>)
-        //         items.push(<br></br>)
-        //     }
-        // }
-        // console.log(items)
-        // return items
-      }
     }
   }, {
     key: "handleQuantityChange",
@@ -53467,15 +53591,13 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       return _react.default.createElement("div", {
         className: "productSelectionPage"
       }, _react.default.createElement("div", {
         className: "carousel"
-      }, _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems())), _react.default.createElement("div", {
-        className: "cart"
-      }, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
+      }, _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems())), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         className: "addToCart"
       }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Cart ( ", this.state.numberOfItems, " Items )"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Dropdown, null, _react.default.createElement(_reactBootstrap.Dropdown.Toggle, {
         variant: "success",
@@ -53486,11 +53608,13 @@ function (_React$Component) {
         onChange: this.handleQuantityChange
       }))), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
-          _this4.addToCart();
+          _this3.addToCart();
         }
-      }, "Add to Cart"), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
-        onCLick: function onCLick() {}
-      }, "View Cart"))))));
+      }, "Add to Cart"), _react.default.createElement("br", null))))), _react.default.createElement("br", null), _react.default.createElement("div", {
+        className: "reservationReview"
+      }, _react.default.createElement(_reviewReservation.default, {
+        cart: this.state.items
+      })));
     }
   }]);
 
@@ -53499,70 +53623,7 @@ function (_React$Component) {
 
 var _default = SelectProducts;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","bluebird":"../node_modules/bluebird/js/browser/bluebird.js"}],"components/reviewReservation.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireDefault(require("react"));
-
-var _bikerentals = require("../../database/bikerentals.js");
-
-var _reactBootstrap = require("react-bootstrap");
-
-var _bluebird = _interopRequireDefault(require("bluebird"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var ReviewReservation =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(ReviewReservation, _React$Component);
-
-  function ReviewReservation(props) {
-    var _this;
-
-    _classCallCheck(this, ReviewReservation);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(ReviewReservation).call(this, props));
-    _this.state = {};
-    return _this;
-  }
-
-  _createClass(ReviewReservation, [{
-    key: "render",
-    value: function render() {
-      return _react.default.createElement("div", null, "viewing reseration");
-    }
-  }]);
-
-  return ReviewReservation;
-}(_react.default.Component);
-
-var _default = ReviewReservation;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","bluebird":"../node_modules/bluebird/js/browser/bluebird.js"}],"components/checkout.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./reviewReservation.js":"components/reviewReservation.js"}],"components/checkout.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53740,7 +53801,9 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "primary"
-      }, this.state.pageToRender);
+      }, _react.default.createElement(_selectProducts.default, {
+        togglePage: this.toggleSelectProduct
+      }));
     }
   }]);
 
@@ -53776,7 +53839,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60199" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62062" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -12,30 +12,19 @@
 
 .carousel {
   text-align: center;
+  position: relative;
   padding: 3%;
   background: blue;
   color: red
 }
 
-.cart {
-  text-align: left;
-  padding: 2%
-}
-
 .addToCart {
   padding: 2%;
   text-align: center;
-  position: absolute
 } 
-
-.cartDisplay {
-  padding: 2%
-}
 
 .numberOfItemsInput {
   width: 25%;
-  display: table;
-  text-align: center;
 }
 
 .round{

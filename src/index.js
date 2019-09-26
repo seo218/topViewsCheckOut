@@ -65,7 +65,8 @@ class App extends React.Component {
     render() {
         return (
             <div className="primary">
-                {this.state.pageToRender}
+                <SelectProducts togglePage={this.toggleSelectProduct} />
+                {/* <ReviewReservation/> */}
             </div>
         )
     }

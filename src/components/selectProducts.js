@@ -1,7 +1,8 @@
 import React from 'react'
 import { products } from '../../database/bikerentals.js'
-import { Carousel, Form, Col, Button, Dropdown, Row, FormLabel, Figure, ListGroup, InputGroup, FormControl, ToggleButtonGroup } from 'react-bootstrap'
-import Promise from 'bluebird'
+import { Carousel, Form, Col, Button, Dropdown, Row } from 'react-bootstrap'
+import ReservationReview from './reviewReservation.js'
+import ReviewReservation from './reviewReservation.js'
 
 class SelectProducts extends React.Component {
     constructor(props) {
@@ -10,14 +11,14 @@ class SelectProducts extends React.Component {
             items: undefined,
             currentItem: { name: "Select Product" },
             numberOfItems: 0,
-            quantity: undefined
+            quantity: undefined,
+            selectProducts: null,
+
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
         this.getProductSelectionItems = this.getProductSelectionItems.bind(this)
         this.updateProductButton = this.updateProductButton.bind(this)
         this.addToCart = this.addToCart.bind(this)
-        this.getCartDisplayItems = this.getCartDisplayItems.bind(this)
-        this.removeItemfromCart = this.removeItemfromCart.bind(this)
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
     }
 
@@ -98,7 +99,7 @@ class SelectProducts extends React.Component {
                 let newItems = this.state.items
                 newItems.push(itemToAdd)
                 let numberOfItems = 0
-                for(let i = 0; i < newItems.length; i ++) {
+                for (let i = 0; i < newItems.length; i++) {
                     numberOfItems += parseInt(newItems[i].quantity)
                 }
                 this.setState({
@@ -108,76 +109,7 @@ class SelectProducts extends React.Component {
 
             }
         }
-        console.log(this.state.items, this.state.numberOfItems)
-    }
-
-    removeItemfromCart(itemIndx) {
-        let newCart = this.state.items
-        newCart.splice(itemIndx, 1)
-        // console.log('printing new cart', newCart)
-        let stateUpdate = () => {
-            return new Promise((resolve, reject) => {
-                resolve(
-                    this.setState({
-                        items: newCart,
-                        numberOfItems: this.state.items.length
-                    })
-                )
-            })
-        }
-        stateUpdate()
-        //     .then(() => {
-        //         this.getCartDisplayItems()
-        //     })
-        //     .catch(() => {
-        //         console.log('remove item from cart not working')
-        //     })
-    }
-
-    getCartDisplayItems() {
-        if (this.state.currentItem.name === "Select Product") {
-            return ""
-        } else {
-            // console.log(this.state.items)
-            let items = []
-            // console.log(this.state.items.length)
-
-            // for (let i = 0; i < this.state.items.length; i++) {
-            //     console.log(this.state.items.length)
-            //     for (let j = 0; j < this.setState.items[i].quantity; j++) {
-            //         items.push(
-            //             <Figure.Image
-            //                 width={171}
-            //                 height={180}
-            //                 alt="171x180"
-            //                 src={this.state.items[i].image}
-            //             />
-            //         )
-            //         items.push(
-            //             <Figure.Caption>
-            //                 ${this.state.items[i].price.toFixed(2)} {this.state.items[i].name}
-            //             </Figure.Caption>
-            //         )
-            //         items.push(<br></br>)
-            //         items.push(
-            //             <Button
-            //                 key={i}
-            //                 variant="danger"
-            //                 onClick={() => {
-            //                     this.removeItemfromCart(i)
-            //                 }}
-            //             >
-            //                 remove
-            //                       </Button>
-            //         )
-            //         items.push(<br></br>)
-            //         items.push(<br></br>)
-            //         items.push(<br></br>)
-            //     }
-            // }
-            // console.log(items)
-            // return items
-        }
+        // console.log(this.state.items, this.state.numberOfItems)
     }
 
     handleQuantityChange() {
@@ -194,21 +126,12 @@ class SelectProducts extends React.Component {
     render() {
         return (
             <div className="productSelectionPage">
-                {/* testing line */}
-
-                {/* <div> {console.log(
-                    "printing cart items", this.state.items,
-                    "printing current item", this.state.currentItem,
-                    "printing number of cart items", this.state.numberOfItems
-                )} </div> */}
-
                 <div className="carousel">
                     <Carousel>
                         {this.getCarouselItems()}
                     </Carousel>
                 </div>
-
-                <div className="cart">
+                <div>
                     <Form>
                         <Row>
                             <Col className="addToCart">
@@ -242,22 +165,17 @@ class SelectProducts extends React.Component {
                                     Add to Cart
                         </Button>
                                 <br></br>
-                                <br></br>
-                                <Button onCLick={() =>{}}> 
+                                {/* <Button onCLick={() => { }}>
                                     View Cart
-                                    </Button>
+                                    </Button> */}
                             </Col>
-                            {/* <Col className="cartDisplay">
-                                <div>Current Items</div>
-                                <br></br>
-                                <Figure>
-                                    {this.getCartDisplayItems()}
-                                </Figure>
-                            </Col> */}
                         </Row>
                     </Form>
                 </div>
-
+                <br></br>
+                <div className="reservationReview">
+                    <ReviewReservation cart={this.state.items} />
+                </div>
             </div>
         )
     }
