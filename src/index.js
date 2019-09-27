@@ -2,70 +2,34 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SelectProducts from './components/selectProducts.js'
-import ReviewReservation from './components/reviewReservation.js'
-import Checkout from './components/checkout.js'
 
 
 
 class App extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
-            pageToRender: <SelectProducts togglePage={this.toggleSelectProduct} />,
-            showSelectProducts: true,
-            selectProducts: null,
-            showReviewReservation: false,
-            reviewReservation: null,
+            pageToRender: <SelectProducts togglePage={this.toggleSelectProductPage} />,
+            showProductSelction: false,
             showCheckout: false,
-            checkout: null
+            showOrderComplete: false
         }
-        this.setPages = this.setPages.bind(this)
-        this.toggleSelectProduct = this.toggleSelectProduct.bind(this)
-        this.toggleReviewReservation = this.toggleReviewReservation.bind(this)
-        this.toggleCheckout = this.toggleCheckout.bind(this)
-
-    }
-    componentWillMount() {
-        this.setPages()
+        // this.toggleSelectProductPage = this.toggleSelectProductPage.bind(this)
     }
 
-    setPages() {
-        this.setState({
-            selectProducts: <SelectProducts togglePage={this.toggleSelectProduct} />,
-            reviewReservation: <ReviewReservation togglePage={this.toggleReviewReservation} />,
-            checkout: <Checkout togglePage={this.toggleCheckout} />
-        })
+
+    toggleSelectProductPage() {
+        console.log('toggling product selection page')
+       this.setState({
+           pageToRender: <Checkout/>
+       })
     }
 
-    toggleSelectProduct() {
-        // e.preventDefault()
-        console.log('working')
-        this.setState({
-            showSelectProducts: false
-        })
-        // this.setState({
-        //     showReviewReservation: !this.state.showReviewReservation
-        // })
-    }
-
-    toggleReviewReservation() {
-        this.setState({
-            showReviewReservation: !this.state.showReviewReservation,
-            showCheckout: !this.state.showCheckout
-        })
-    }
-
-    toggleCheckout() {
-        this.setState({
-            showCheckout: !this.state.showCheckout
-        })
-
-    }
 
     render() {
         return (
             <div className="primary">
-                <SelectProducts togglePage={this.toggleSelectProduct} />
+                <SelectProducts />
             </div>
         )
     }

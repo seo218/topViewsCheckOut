@@ -47397,7 +47397,7 @@ function (_React$Component) {
       if (this.props.cart === undefined) {
         return _react.default.createElement("div", {
           className: "emptyCart"
-        }, "needs to be centered");
+        });
       } else {
         var _ret = function () {
           var popover = _react.default.createElement(_reactBootstrap.Popover, {
@@ -47448,10 +47448,13 @@ function (_React$Component) {
       }, _react.default.createElement("thead", null, _react.default.createElement("tr", null, _react.default.createElement("th", null, "Product"), _react.default.createElement("th", null, "Price"), _react.default.createElement("th", null, "Quantity"), _react.default.createElement("th", null, "Product type"))), _react.default.createElement("tbody", null, this.renderCart(), _react.default.createElement("tr", null, _react.default.createElement("th", null, "Total"), _react.default.createElement("th", null), _react.default.createElement("th", null), _react.default.createElement("th", null, this.props.total))))), _react.default.createElement(_reactBootstrap.Modal.Footer, null, _react.default.createElement(_reactBootstrap.Button, {
         variant: "secondary",
         onClick: function onClick() {
-          _this3.props.toggle();
+          _this3.props.toggleSummary();
         }
       }, "Back to product selection"), _react.default.createElement(_reactBootstrap.Button, {
-        variant: "primary"
+        variant: "primary",
+        onClick: function onClick() {
+          _this3.props.toggleCheckout();
+        }
       }, "Proceed to Checkout")));
     }
   }]);
@@ -53394,10 +53397,14 @@ function (_React$Component) {
   _createClass(Checkout, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
+      var _this2 = this;
+
+      return _react.default.createElement("div", null, _react.default.createElement("div", {
         className: "checkOut"
       }, "Billing Info", _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
-        placeholder: "Full Name"
+        placeholder: "Name on card"
+      })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        placeholder: "Card Number"
       })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
         placeholder: "Street Address"
       })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
@@ -53406,7 +53413,14 @@ function (_React$Component) {
         placeholder: "State"
       })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
         placeholder: "Zip"
-      })));
+      })), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.InputGroup, null, _react.default.createElement(_reactBootstrap.FormControl, {
+        placeholder: "cvc"
+      }))), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Modal.Footer, null, _react.default.createElement(_reactBootstrap.Button, {
+        variant: "secondary",
+        onClick: function onClick() {
+          _this2.props.toggleCheckout();
+        }
+      }, "Review Order"), _react.default.createElement(_reactBootstrap.Button, null, "Complete purchase")));
     }
   }]);
 
@@ -53474,7 +53488,8 @@ function (_React$Component) {
       selectProducts: null,
       totalPrice: "$".concat(0),
       cartId: 0,
-      showCart: false
+      showCart: false,
+      showCheckout: false
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
@@ -53484,6 +53499,7 @@ function (_React$Component) {
     _this.updateTotal = _this.updateTotal.bind(_assertThisInitialized(_this));
     _this.removeItemFromCart = _this.removeItemFromCart.bind(_assertThisInitialized(_this));
     _this.toggleCartSummary = _this.toggleCartSummary.bind(_assertThisInitialized(_this));
+    _this.toggleCheckout = _this.toggleCheckout.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -53646,6 +53662,14 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "toggleCheckout",
+    value: function toggleCheckout() {
+      this.setState({
+        showCart: !this.state.showCart,
+        showCheckout: !this.state.showCheckout
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -53674,12 +53698,18 @@ function (_React$Component) {
       }, "View Cart")))), _react.default.createElement("div", {
         className: "reservationReview"
       }, _react.default.createElement(_reactBootstrap.Modal, {
-        show: this.state.showCart
+        show: this.state.showCart,
+        onHide: this.toggleCartSummary
       }, _react.default.createElement(_reviewReservation.default, {
         cart: this.state.items,
         total: this.state.totalPrice,
         removeFromCart: this.removeItemFromCart,
-        toggle: this.toggleCartSummary
+        toggleSummary: this.toggleCartSummary,
+        toggleCheckout: this.toggleCheckout
+      }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+        show: this.state.showCheckout
+      }, _react.default.createElement(_checkout.default, {
+        toggleCheckout: this.toggleCheckout
       })))));
     }
   }]);
@@ -53700,10 +53730,6 @@ require("bootstrap/dist/css/bootstrap.min.css");
 
 var _selectProducts = _interopRequireDefault(require("./components/selectProducts.js"));
 
-var _reviewReservation = _interopRequireDefault(require("./components/reviewReservation.js"));
-
-var _checkout = _interopRequireDefault(require("./components/checkout.js"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -53716,9 +53742,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
@@ -53737,66 +53763,22 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
       pageToRender: _react.default.createElement(_selectProducts.default, {
-        togglePage: _this.toggleSelectProduct
+        togglePage: _this.toggleSelectProductPage
       }),
-      showSelectProducts: true,
-      selectProducts: null,
-      showReviewReservation: false,
-      reviewReservation: null,
+      showProductSelction: false,
       showCheckout: false,
-      checkout: null
+      showOrderComplete: false // this.toggleSelectProductPage = this.toggleSelectProductPage.bind(this)
+
     };
-    _this.setPages = _this.setPages.bind(_assertThisInitialized(_this));
-    _this.toggleSelectProduct = _this.toggleSelectProduct.bind(_assertThisInitialized(_this));
-    _this.toggleReviewReservation = _this.toggleReviewReservation.bind(_assertThisInitialized(_this));
-    _this.toggleCheckout = _this.toggleCheckout.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.setPages();
-    }
-  }, {
-    key: "setPages",
-    value: function setPages() {
+    key: "toggleSelectProductPage",
+    value: function toggleSelectProductPage() {
+      console.log('toggling product selection page');
       this.setState({
-        selectProducts: _react.default.createElement(_selectProducts.default, {
-          togglePage: this.toggleSelectProduct
-        }),
-        reviewReservation: _react.default.createElement(_reviewReservation.default, {
-          togglePage: this.toggleReviewReservation
-        }),
-        checkout: _react.default.createElement(_checkout.default, {
-          togglePage: this.toggleCheckout
-        })
-      });
-    }
-  }, {
-    key: "toggleSelectProduct",
-    value: function toggleSelectProduct() {
-      // e.preventDefault()
-      console.log('working');
-      this.setState({
-        showSelectProducts: false
-      }); // this.setState({
-      //     showReviewReservation: !this.state.showReviewReservation
-      // })
-    }
-  }, {
-    key: "toggleReviewReservation",
-    value: function toggleReviewReservation() {
-      this.setState({
-        showReviewReservation: !this.state.showReviewReservation,
-        showCheckout: !this.state.showCheckout
-      });
-    }
-  }, {
-    key: "toggleCheckout",
-    value: function toggleCheckout() {
-      this.setState({
-        showCheckout: !this.state.showCheckout
+        pageToRender: _react.default.createElement(Checkout, null)
       });
     }
   }, {
@@ -53804,9 +53786,7 @@ function (_React$Component) {
     value: function render() {
       return _react.default.createElement("div", {
         className: "primary"
-      }, _react.default.createElement(_selectProducts.default, {
-        togglePage: this.toggleSelectProduct
-      }));
+      }, _react.default.createElement(_selectProducts.default, null));
     }
   }]);
 
@@ -53814,7 +53794,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById("app"));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","./components/selectProducts.js":"components/selectProducts.js","./components/reviewReservation.js":"components/reviewReservation.js","./components/checkout.js":"components/checkout.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","./components/selectProducts.js":"components/selectProducts.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

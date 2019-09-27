@@ -14,7 +14,7 @@ class ReviewReservation extends React.Component {
     if (this.props.cart === undefined) {
       return (
         <div className="emptyCart">
-          needs to be centered
+         
         </div>
       )
     } else {
@@ -76,8 +76,8 @@ class ReviewReservation extends React.Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={() => {this.props.toggle()}}>Back to product selection</Button>
-            <Button variant="primary">Proceed to Checkout</Button>
+            <Button variant="secondary" onClick={() => {this.props.toggleSummary()}}>Back to product selection</Button>
+            <Button variant="primary"  onClick={() => {this.props.toggleCheckout() }} >Proceed to Checkout</Button>
           </Modal.Footer>
       
       </div >

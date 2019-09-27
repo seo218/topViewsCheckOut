@@ -15,7 +15,8 @@ class SelectProducts extends React.Component {
             selectProducts: null,
             totalPrice: `$${0}`,
             cartId: 0,
-            showCart: false
+            showCart: false,
+            showCheckout: false
 
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
@@ -26,6 +27,7 @@ class SelectProducts extends React.Component {
         this.updateTotal = this.updateTotal.bind(this)
         this.removeItemFromCart = this.removeItemFromCart.bind(this)
         this.toggleCartSummary = this.toggleCartSummary.bind(this)
+        this.toggleCheckout = this.toggleCheckout.bind(this)
     }
 
 
@@ -170,6 +172,14 @@ class SelectProducts extends React.Component {
         })
     }
 
+    toggleCheckout() {
+        this.setState({
+            showCart: !this.state.showCart,
+            showCheckout: !this.state.showCheckout
+        })
+    }
+    
+
     render() {
         return (
             <div className="productSelectionPage">
@@ -219,13 +229,19 @@ class SelectProducts extends React.Component {
                         </Row>
                     </Form>
                     <div className="reservationReview">
-                        <Modal show={this.state.showCart} >
+                        <Modal show={this.state.showCart} onHide={this.toggleCartSummary}>
                             <ReviewReservation
                                 cart={this.state.items}
                                 total={this.state.totalPrice}
                                 removeFromCart={this.removeItemFromCart}
-                                toggle={this.toggleCartSummary}
+                                toggleSummary={this.toggleCartSummary}
+                                toggleCheckout={this.toggleCheckout}
                             />
+                        </Modal>
+                    </div>
+                    <div>
+                        <Modal show={this.state.showCheckout}>
+                            <Checkout toggleCheckout={this.toggleCheckout}/>
                         </Modal>
                     </div>
                 </div>
