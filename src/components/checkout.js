@@ -71,7 +71,9 @@ class Checkout extends React.Component {
             >
                   Review Order
           </Button>  
-          <Button>
+          <Button 
+            onClick={() => {this.props.toggleOrderComplete()}}
+          >
                   Complete purchase
           </Button>
           </Modal.Footer>

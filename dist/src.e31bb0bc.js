@@ -53420,7 +53420,11 @@ function (_React$Component) {
         onClick: function onClick() {
           _this2.props.toggleCheckout();
         }
-      }, "Review Order"), _react.default.createElement(_reactBootstrap.Button, null, "Complete purchase")));
+      }, "Review Order"), _react.default.createElement(_reactBootstrap.Button, {
+        onClick: function onClick() {
+          _this2.props.toggleOrderComplete();
+        }
+      }, "Complete purchase")));
     }
   }]);
 
@@ -53490,7 +53494,8 @@ function (_React$Component) {
       cartId: 0,
       showCart: false,
       showCheckout: false,
-      showAlert: false
+      showAlert: false,
+      showOrderComplete: false
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
@@ -53503,6 +53508,8 @@ function (_React$Component) {
     _this.toggleCheckout = _this.toggleCheckout.bind(_assertThisInitialized(_this));
     _this.renderAlert = _this.renderAlert.bind(_assertThisInitialized(_this));
     _this.toggleAlert = _this.toggleAlert.bind(_assertThisInitialized(_this));
+    _this.renderOrderCompleteAlert = _this.renderOrderCompleteAlert.bind(_assertThisInitialized(_this));
+    _this.toggleOrderComplete = _this.toggleOrderComplete.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -53707,6 +53714,21 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "renderOrderCompleteAlert",
+    value: function renderOrderCompleteAlert() {
+      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal.Header, {
+        closeButton: true
+      }), _react.default.createElement(_reactBootstrap.Modal.Body, null, _react.default.createElement("div", null, "Congratulations your order is complete")));
+    }
+  }, {
+    key: "toggleOrderComplete",
+    value: function toggleOrderComplete() {
+      this.setState({
+        showOrderComplete: !this.state.showOrderComplete,
+        showCheckout: !this.state.showCheckout
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -53746,12 +53768,21 @@ function (_React$Component) {
       }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         show: this.state.showCheckout
       }, _react.default.createElement(_checkout.default, {
-        toggleCheckout: this.toggleCheckout
+        toggleCheckout: this.toggleCheckout,
+        toggleOrderComplete: this.toggleOrderComplete
       }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+        className: "alert",
         show: this.state.showAlert,
-        variant: "danger",
         onHide: this.toggleAlert
-      }, this.renderAlert()))));
+      }, this.renderAlert())), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+        className: "orderComplete",
+        show: this.state.showOrderComplete,
+        onHide: function onHide() {
+          _this3.setState({
+            showOrderComplete: !_this3.state.showOrderComplete
+          });
+        }
+      }, this.renderOrderCompleteAlert()))));
     }
   }]);
 
@@ -53863,7 +53894,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60915" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58790" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

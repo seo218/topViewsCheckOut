@@ -17,7 +17,8 @@ class SelectProducts extends React.Component {
             cartId: 0,
             showCart: false,
             showCheckout: false,
-            showAlert: false
+            showAlert: false,
+            showOrderComplete: false
 
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
@@ -31,6 +32,8 @@ class SelectProducts extends React.Component {
         this.toggleCheckout = this.toggleCheckout.bind(this)
         this.renderAlert = this.renderAlert.bind(this)
         this.toggleAlert = this.toggleAlert.bind(this)
+        this.renderOrderCompleteAlert = this.renderOrderCompleteAlert.bind(this)
+        this.toggleOrderComplete = this.toggleOrderComplete.bind(this)
     }
 
 
@@ -221,6 +224,25 @@ class SelectProducts extends React.Component {
         }
     }
 
+    renderOrderCompleteAlert() {
+        return (
+            <div>
+                <Modal.Header closeButton>
+                </Modal.Header>
+                <Modal.Body>
+                <div>Congratulations your order is complete</div>
+                </Modal.Body>
+            </div>
+        )
+    }
+    
+    toggleOrderComplete() {
+        this.setState({
+            showOrderComplete: !this.state.showOrderComplete,
+            showCheckout: !this.state.showCheckout
+        })
+    }
+
 
     render() {
         return (
@@ -278,17 +300,38 @@ class SelectProducts extends React.Component {
                                 removeFromCart={this.removeItemFromCart}
                                 toggleSummary={this.toggleCartSummary}
                                 toggleCheckout={this.toggleCheckout}
+                                
                             />
                         </Modal>
                     </div>
                     <div>
                         <Modal show={this.state.showCheckout}>
-                            <Checkout toggleCheckout={this.toggleCheckout} />
+                            <Checkout 
+                                toggleCheckout={this.toggleCheckout}
+                                toggleOrderComplete={this.toggleOrderComplete}
+                             />
                         </Modal>
                     </div>
                     <div>
-                        <Modal show={this.state.showAlert} variant="danger" onHide={this.toggleAlert}>
+                        <Modal 
+                            className="alert"
+                            show={this.state.showAlert}  
+                            onHide={this.toggleAlert}
+                        >
                             {this.renderAlert()}
+                        </Modal>
+                    </div>
+                    <div>
+                        <Modal 
+                            className="orderComplete"
+                            show={this.state.showOrderComplete} 
+                            onHide={() => {
+                                this.setState({
+                                    showOrderComplete: !this.state.showOrderComplete
+                                })
+                            }}
+                        >
+                            {this.renderOrderCompleteAlert()}
                         </Modal>
                     </div>
                 </div>
