@@ -10,103 +10,11 @@ class ReviewReservation extends React.Component {
     super(props)
     this.state = {
     }
-    this.getCartDisplayItems = this.getCartDisplayItems.bind(this)
-    this.removeItemfromCart = this.removeItemfromCart.bind(this)
     this.renderCart = this.renderCart.bind(this)
-    this.updateTotal = this.updateTotal.bind(this)
+    this.removeItemfromCart = this.removeItemfromCart.bind(this)
+    // this.updateTotal = this.updateTotal.bind(this)
     // this.sortCart = this.sortCart.bind(this)
   }
-
-  removeItemfromCart(itemIndx) {
-    let newCart = this.state.items
-    newCart.splice(itemIndx, 1)
-    // console.log('printing new cart', newCart)
-    let stateUpdate = () => {
-      return new Promise((resolve, reject) => {
-        resolve(
-          this.setState({
-            items: newCart,
-            numberOfItems: this.state.items.length
-          })
-        )
-      })
-    }
-  }
-
-  getCartDisplayItems() {
-    // if (this.state.currentItem.name === "Select Product") {
-    //     return ""
-    // } else {
-    // console.log(this.state.items)
-    // let items = []
-    // console.log(this.state.items.length)
-
-    // for (let i = 0; i < this.state.items.length; i++) {
-    //     console.log(this.state.items.length)
-    //     for (let j = 0; j < this.setState.items[i].quantity; j++) {
-    //         items.push(
-    //             <Figure.Image
-    //                 width={171}
-    //                 height={180}
-    //                 alt="171x180"
-    //                 src={this.state.items[i].image}
-    //             />
-    //         )
-    //         items.push(
-    //             <Figure.Caption>
-    //                 ${this.state.items[i].price.toFixed(2)} {this.state.items[i].name}
-    //             </Figure.Caption>
-    //         )
-    //         items.push(<br></br>)
-    //         items.push(
-    //             <Button
-    //                 key={i}
-    //                 variant="danger"
-    //                 onClick={() => {
-    //                     this.removeItemfromCart(i)
-    //                 }}
-    //             >
-    //                 remove
-    //                       </Button>
-    //         )
-    //         items.push(<br></br>)
-    //         items.push(<br></br>)
-    //         items.push(<br></br>)
-    //     }
-    // }
-    // console.log(items)
-    // return items
-    // }
-    // }
-
-    stateUpdate()
-    //     .then(() => {
-    //         this.getCartDisplayItems()
-    //     })
-    //     .catch(() => {
-    //         console.log('remove item from cart not working')
-    //     })
-  }
-
-
-  sortCart () {
-  //   let sortedCart = []
-  //   let cart = this.props.cart
-  //   for (let i = 0; i < cart.length; i++) {
-  //     // console.log('printing inside loop 1', cart[i].name, cartToRender)
-  //     if (sortedCart.length === 0) {
-  //       cart[0].totaled = false
-  //       sortedCart.push(cart[0])
-  //     } else {
-  //       if (!sortedCart.includes(cart[i])) {
-  //         cart[i].totaled = false
-  //         sortedCart.push(cart[i])
-  //       }
-  //     }
-  // }
-  // // console.log(sortedCart)
-  // return sortedCart
-}
 
   renderCart() {
     if(this.props.cart === undefined) {
@@ -140,6 +48,46 @@ class ReviewReservation extends React.Component {
       }
       return cartArray
     }
+}
+
+  removeItemfromCart(itemIndx) {
+    if(this.props.cart === undefined) {
+      console.log('cart is empty')
+    } else {
+      let cart = this.car
+    }
+    let newCart = this.state.items
+    newCart.splice(itemIndx, 1)
+    // console.log('printing new cart', newCart)
+    let stateUpdate = () => {
+      return new Promise((resolve, reject) => {
+        resolve(
+          this.setState({
+            items: newCart,
+            numberOfItems: this.state.items.length
+          })
+        )
+      })
+    }
+  }
+
+  sortCart () {
+  //   let sortedCart = []
+  //   let cart = this.props.cart
+  //   for (let i = 0; i < cart.length; i++) {
+  //     // console.log('printing inside loop 1', cart[i].name, cartToRender)
+  //     if (sortedCart.length === 0) {
+  //       cart[0].totaled = false
+  //       sortedCart.push(cart[0])
+  //     } else {
+  //       if (!sortedCart.includes(cart[i])) {
+  //         cart[i].totaled = false
+  //         sortedCart.push(cart[i])
+  //       }
+  //     }
+  // }
+  // // console.log(sortedCart)
+  // return sortedCart
 }
 
 updateTotal() {

@@ -13,7 +13,8 @@ class SelectProducts extends React.Component {
             numberOfItems: 0,
             quantity: undefined,
             selectProducts: null,
-            totalPrice: `$${0}`
+            totalPrice: `$${0}`,
+            cartId: 0
 
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
@@ -22,6 +23,7 @@ class SelectProducts extends React.Component {
         this.addToCart = this.addToCart.bind(this)
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
         this.updateTotal = this.updateTotal.bind(this)
+        this.removeItemfromCart = this.removeItemfromCart.bind(this)
     }
 
     getCarouselItems() {
@@ -75,24 +77,27 @@ class SelectProducts extends React.Component {
         if (this.state.currentItem.name === "Select Product") {
             console.log('no product selected')
         } else {
+            let itemToAdd = JSON.parse(JSON.stringify(this.state.currentItem))
+            itemToAdd.cartId = this.state.cartId
+            // console.log('printind current item and item to add', this.state.currentItem, itemToAdd)
+            let newCartId = this.state.cartId 
+            newCartId ++
+            this.setState({
+                cartId: newCartId
+            })
             if (this.state.items === undefined) {
-                let items = this.state.currentItem
                 if (this.state.quantity === undefined) {
-                    items.quantity = 1
+                    itemToAdd.quantity = 1
                 } else {
-                    items.quantity = this.state.quantity
+                    itemToAdd.quantity = this.state.quantity
                 }
-                let newItemsArray = []
-                newItemsArray.push(items)
+                let itemArray = []
+                itemArray.push(itemToAdd)
                 this.setState({
-                    items: newItemsArray,
-                    numberOfItems: items.quantity
+                    items: itemArray,
+                    numberOfItems: itemToAdd.quantity
                 })
             } else {
-                // bug is here 
-                // quantity resets to state quantity 
-                // if item in items array are the same as state current item
-                let itemToAdd = this.state.currentItem
                 if (this.state.quantity === undefined) {
                     itemToAdd.quantity = 1
                 } else {
@@ -112,7 +117,7 @@ class SelectProducts extends React.Component {
 
             }
         }
-        // console.log(this.state.items, this.state.numberOfItems)
+        console.log(this.state.items, this.state.numberOfItems)
     }
 
     handleQuantityChange() {
@@ -126,17 +131,38 @@ class SelectProducts extends React.Component {
     }
 
     updateTotal() {
-        if(this.state.items === undefined || this.state.items.length === 0) {
-          console.log('cart is empty')
+        if (this.state.items === undefined || this.state.items.length === 0) {
+            console.log('cart is empty')
         } else {
-          let total = 0
-          let cart = this.state.items
-          for(let i = 0; i < cart.length; i ++) {
-            total += (cart[i].price * cart[i].quantity)
-          }
-          return `$${total.toFixed(2)}`
+            let total = 0
+            let cart = this.state.items
+            for (let i = 0; i < cart.length; i++) {
+                total += (cart[i].price * cart[i].quantity)
+            }
+            return `$${total.toFixed(2)}`
         }
-      }
+    }
+
+    removeItemfromCart(itemIndx) {
+        if (this.state.items === undefined) {
+            console.log('cart is empty')
+        } else {
+            let cart = this.state.items
+        }
+        let newCart = this.state.items
+        newCart.splice(itemIndx, 1)
+        // console.log('printing new cart', newCart)
+        let stateUpdate = () => {
+            return new Promise((resolve, reject) => {
+                resolve(
+                    this.setState({
+                        items: newCart,
+                        numberOfItems: this.state.items.length
+                    })
+                )
+            })
+        }
+    }
 
     render() {
         return (
@@ -189,9 +215,9 @@ class SelectProducts extends React.Component {
                 </div>
                 <br></br>
                 <div className="reservationReview">
-                    <ReviewReservation 
-                    cart={this.state.items} 
-                    total={this.state.totalPrice}
+                    <ReviewReservation
+                        cart={this.state.items}
+                        total={this.state.totalPrice}
                     />
                 </div>
             </div>

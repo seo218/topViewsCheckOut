@@ -58970,104 +58970,14 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ReviewReservation).call(this, props));
     _this.state = {};
-    _this.getCartDisplayItems = _this.getCartDisplayItems.bind(_assertThisInitialized(_this));
-    _this.removeItemfromCart = _this.removeItemfromCart.bind(_assertThisInitialized(_this));
     _this.renderCart = _this.renderCart.bind(_assertThisInitialized(_this));
-    _this.updateTotal = _this.updateTotal.bind(_assertThisInitialized(_this)); // this.sortCart = this.sortCart.bind(this)
+    _this.removeItemfromCart = _this.removeItemfromCart.bind(_assertThisInitialized(_this)); // this.updateTotal = this.updateTotal.bind(this)
+    // this.sortCart = this.sortCart.bind(this)
 
     return _this;
   }
 
   _createClass(ReviewReservation, [{
-    key: "removeItemfromCart",
-    value: function removeItemfromCart(itemIndx) {
-      var _this2 = this;
-
-      var newCart = this.state.items;
-      newCart.splice(itemIndx, 1); // console.log('printing new cart', newCart)
-
-      var stateUpdate = function stateUpdate() {
-        return new _bluebird.default(function (resolve, reject) {
-          resolve(_this2.setState({
-            items: newCart,
-            numberOfItems: _this2.state.items.length
-          }));
-        });
-      };
-    }
-  }, {
-    key: "getCartDisplayItems",
-    value: function getCartDisplayItems() {
-      // if (this.state.currentItem.name === "Select Product") {
-      //     return ""
-      // } else {
-      // console.log(this.state.items)
-      // let items = []
-      // console.log(this.state.items.length)
-      // for (let i = 0; i < this.state.items.length; i++) {
-      //     console.log(this.state.items.length)
-      //     for (let j = 0; j < this.setState.items[i].quantity; j++) {
-      //         items.push(
-      //             <Figure.Image
-      //                 width={171}
-      //                 height={180}
-      //                 alt="171x180"
-      //                 src={this.state.items[i].image}
-      //             />
-      //         )
-      //         items.push(
-      //             <Figure.Caption>
-      //                 ${this.state.items[i].price.toFixed(2)} {this.state.items[i].name}
-      //             </Figure.Caption>
-      //         )
-      //         items.push(<br></br>)
-      //         items.push(
-      //             <Button
-      //                 key={i}
-      //                 variant="danger"
-      //                 onClick={() => {
-      //                     this.removeItemfromCart(i)
-      //                 }}
-      //             >
-      //                 remove
-      //                       </Button>
-      //         )
-      //         items.push(<br></br>)
-      //         items.push(<br></br>)
-      //         items.push(<br></br>)
-      //     }
-      // }
-      // console.log(items)
-      // return items
-      // }
-      // }
-      stateUpdate(); //     .then(() => {
-      //         this.getCartDisplayItems()
-      //     })
-      //     .catch(() => {
-      //         console.log('remove item from cart not working')
-      //     })
-    }
-  }, {
-    key: "sortCart",
-    value: function sortCart() {//   let sortedCart = []
-      //   let cart = this.props.cart
-      //   for (let i = 0; i < cart.length; i++) {
-      //     // console.log('printing inside loop 1', cart[i].name, cartToRender)
-      //     if (sortedCart.length === 0) {
-      //       cart[0].totaled = false
-      //       sortedCart.push(cart[0])
-      //     } else {
-      //       if (!sortedCart.includes(cart[i])) {
-      //         cart[i].totaled = false
-      //         sortedCart.push(cart[i])
-      //       }
-      //     }
-      // }
-      // // console.log(sortedCart)
-      // return sortedCart
-    }
-  }, {
     key: "renderCart",
     value: function renderCart() {
       if (this.props.cart === undefined) {
@@ -59095,6 +59005,48 @@ function (_React$Component) {
 
         return cartArray;
       }
+    }
+  }, {
+    key: "removeItemfromCart",
+    value: function removeItemfromCart(itemIndx) {
+      var _this2 = this;
+
+      if (this.props.cart === undefined) {
+        console.log('cart is empty');
+      } else {
+        var _cart2 = this.car;
+      }
+
+      var newCart = this.state.items;
+      newCart.splice(itemIndx, 1); // console.log('printing new cart', newCart)
+
+      var stateUpdate = function stateUpdate() {
+        return new _bluebird.default(function (resolve, reject) {
+          resolve(_this2.setState({
+            items: newCart,
+            numberOfItems: _this2.state.items.length
+          }));
+        });
+      };
+    }
+  }, {
+    key: "sortCart",
+    value: function sortCart() {//   let sortedCart = []
+      //   let cart = this.props.cart
+      //   for (let i = 0; i < cart.length; i++) {
+      //     // console.log('printing inside loop 1', cart[i].name, cartToRender)
+      //     if (sortedCart.length === 0) {
+      //       cart[0].totaled = false
+      //       sortedCart.push(cart[0])
+      //     } else {
+      //       if (!sortedCart.includes(cart[i])) {
+      //         cart[i].totaled = false
+      //         sortedCart.push(cart[i])
+      //       }
+      //     }
+      // }
+      // // console.log(sortedCart)
+      // return sortedCart
     }
   }, {
     key: "updateTotal",
@@ -59186,7 +59138,8 @@ function (_React$Component) {
       numberOfItems: 0,
       quantity: undefined,
       selectProducts: null,
-      totalPrice: "$".concat(0)
+      totalPrice: "$".concat(0),
+      cartId: 0
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
@@ -59194,6 +59147,7 @@ function (_React$Component) {
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     _this.handleQuantityChange = _this.handleQuantityChange.bind(_assertThisInitialized(_this));
     _this.updateTotal = _this.updateTotal.bind(_assertThisInitialized(_this));
+    _this.removeItemfromCart = _this.removeItemfromCart.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -59251,27 +59205,29 @@ function (_React$Component) {
       if (this.state.currentItem.name === "Select Product") {
         console.log('no product selected');
       } else {
-        if (this.state.items === undefined) {
-          var items = this.state.currentItem;
+        var itemToAdd = JSON.parse(JSON.stringify(this.state.currentItem));
+        itemToAdd.cartId = this.state.cartId; // console.log('printind current item and item to add', this.state.currentItem, itemToAdd)
 
+        var newCartId = this.state.cartId;
+        newCartId++;
+        this.setState({
+          cartId: newCartId
+        });
+
+        if (this.state.items === undefined) {
           if (this.state.quantity === undefined) {
-            items.quantity = 1;
+            itemToAdd.quantity = 1;
           } else {
-            items.quantity = this.state.quantity;
+            itemToAdd.quantity = this.state.quantity;
           }
 
-          var newItemsArray = [];
-          newItemsArray.push(items);
+          var itemArray = [];
+          itemArray.push(itemToAdd);
           this.setState({
-            items: newItemsArray,
-            numberOfItems: items.quantity
+            items: itemArray,
+            numberOfItems: itemToAdd.quantity
           });
         } else {
-          // bug is here 
-          // quantity resets to state quantity 
-          // if item in items array are the same as state current item
-          var itemToAdd = this.state.currentItem;
-
           if (this.state.quantity === undefined) {
             itemToAdd.quantity = 1;
           } else {
@@ -59292,8 +59248,9 @@ function (_React$Component) {
             totalPrice: this.updateTotal()
           });
         }
-      } // console.log(this.state.items, this.state.numberOfItems)
+      }
 
+      console.log(this.state.items, this.state.numberOfItems);
     }
   }, {
     key: "handleQuantityChange",
@@ -59324,9 +59281,32 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "removeItemfromCart",
+    value: function removeItemfromCart(itemIndx) {
+      var _this3 = this;
+
+      if (this.state.items === undefined) {
+        console.log('cart is empty');
+      } else {
+        var cart = this.state.items;
+      }
+
+      var newCart = this.state.items;
+      newCart.splice(itemIndx, 1); // console.log('printing new cart', newCart)
+
+      var stateUpdate = function stateUpdate() {
+        return new Promise(function (resolve, reject) {
+          resolve(_this3.setState({
+            items: newCart,
+            numberOfItems: _this3.state.items.length
+          }));
+        });
+      };
+    }
+  }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react.default.createElement("div", {
         className: "productSelectionPage"
@@ -59343,7 +59323,7 @@ function (_React$Component) {
         onChange: this.handleQuantityChange
       }))), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
-          _this3.addToCart();
+          _this4.addToCart();
         }
       }, "Add to Cart"), _react.default.createElement("br", null))))), _react.default.createElement("br", null), _react.default.createElement("div", {
         className: "reservationReview"
@@ -59575,7 +59555,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54242" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60915" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
