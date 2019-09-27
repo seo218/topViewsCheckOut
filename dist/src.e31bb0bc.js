@@ -30609,7 +30609,48 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../database/bikerentals.js":[function(require,module,exports) {
+var products = [{
+  "id": 1,
+  "name": "Adult Male Bike",
+  "price": 20.50,
+  "image": "http://via.placeholder.com/250x250?text=Adult%20Male%20Bike",
+  "product_type": "bike"
+}, {
+  "id": 2,
+  "name": "Adult Female Bike",
+  "price": 20.50,
+  "image": "http://via.placeholder.com/250x250?text=Adult%20Female%20Bike",
+  "product_type": "bike"
+}, {
+  "id": 3,
+  "name": "Kids Unisex Bike",
+  "price": 12.75,
+  "image": "http://via.placeholder.com/250x250?text=Kids%20Unisex%20Bike",
+  "product_type": "bike"
+}, {
+  "id": 4,
+  "name": "Adult Unisex Helmet",
+  "price": 4.00,
+  "image": "http://via.placeholder.com/250x250?text=Adult%20Unisex%20Helmet",
+  "product_type": "accessory"
+}, {
+  "id": 5,
+  "name": "Kids Unisex Helmet",
+  "price": 3.50,
+  "image": "http://via.placeholder.com/250x250?text=Kids%20Unisex%20Helmet",
+  "product_type": "accessory"
+}, {
+  "id": 6,
+  "name": "Insurance",
+  "price": 9.99,
+  "image": "http://via.placeholder.com/250x250?text=Insurance",
+  "product_type": "addon"
+}];
+module.exports = {
+  products: products
+};
+},{}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -30681,48 +30722,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../database/bikerentals.js":[function(require,module,exports) {
-var products = [{
-  "id": 1,
-  "name": "Adult Male Bike",
-  "price": 20.50,
-  "image": "http://via.placeholder.com/250x250?text=Adult%20Male%20Bike",
-  "product_type": "bike"
-}, {
-  "id": 2,
-  "name": "Adult Female Bike",
-  "price": 20.50,
-  "image": "http://via.placeholder.com/250x250?text=Adult%20Female%20Bike",
-  "product_type": "bike"
-}, {
-  "id": 3,
-  "name": "Kids Unisex Bike",
-  "price": 12.75,
-  "image": "http://via.placeholder.com/250x250?text=Kids%20Unisex%20Bike",
-  "product_type": "bike"
-}, {
-  "id": 4,
-  "name": "Adult Unisex Helmet",
-  "price": 4.00,
-  "image": "http://via.placeholder.com/250x250?text=Adult%20Unisex%20Helmet",
-  "product_type": "accessory"
-}, {
-  "id": 5,
-  "name": "Kids Unisex Helmet",
-  "price": 3.50,
-  "image": "http://via.placeholder.com/250x250?text=Kids%20Unisex%20Helmet",
-  "product_type": "accessory"
-}, {
-  "id": 6,
-  "name": "Insurance",
-  "price": 9.99,
-  "image": "http://via.placeholder.com/250x250?text=Insurance",
-  "product_type": "addon"
-}];
-module.exports = {
-  products: products
-};
-},{}],"../node_modules/@babel/runtime/helpers/esm/extends.js":[function(require,module,exports) {
+},{"_css_loader":"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"../node_modules/@babel/runtime/helpers/esm/extends.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53433,23 +53433,22 @@ function (_React$Component) {
 
 var _default = Checkout;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","bluebird":"../node_modules/bluebird/js/browser/bluebird.js"}],"components/selectProducts.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","bluebird":"../node_modules/bluebird/js/browser/bluebird.js"}],"index.js":[function(require,module,exports) {
 "use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _bikerentals = require("../../database/bikerentals.js");
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _bikerentals = require("../database/bikerentals.js");
+
+require("bootstrap/dist/css/bootstrap.min.css");
 
 var _reactBootstrap = require("react-bootstrap");
 
-var _reviewReservation = _interopRequireDefault(require("./reviewReservation.js"));
+var _reviewReservation = _interopRequireDefault(require("./components/reviewReservation.js"));
 
-var _checkout = _interopRequireDefault(require("./checkout.js"));
+var _checkout = _interopRequireDefault(require("./components/checkout.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -53471,17 +53470,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var SelectProducts =
+var App =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(SelectProducts, _React$Component);
+  _inherits(App, _React$Component);
 
-  function SelectProducts(props) {
+  function App(props) {
     var _this;
 
-    _classCallCheck(this, SelectProducts);
+    _classCallCheck(this, App);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SelectProducts).call(this, props));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
     _this.state = {
       items: undefined,
       currentItem: {
@@ -53513,7 +53512,7 @@ function (_React$Component) {
     return _this;
   }
 
-  _createClass(SelectProducts, [{
+  _createClass(App, [{
     key: "getCarouselItems",
     value: function getCarouselItems() {
       var items = [];
@@ -53786,87 +53785,11 @@ function (_React$Component) {
     }
   }]);
 
-  return SelectProducts;
-}(_react.default.Component);
-
-var _default = SelectProducts;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js","../../database/bikerentals.js":"../database/bikerentals.js","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./reviewReservation.js":"components/reviewReservation.js","./checkout.js":"components/checkout.js"}],"index.js":[function(require,module,exports) {
-"use strict";
-
-var _react = _interopRequireDefault(require("react"));
-
-var _reactDom = _interopRequireDefault(require("react-dom"));
-
-require("bootstrap/dist/css/bootstrap.min.css");
-
-var _selectProducts = _interopRequireDefault(require("./components/selectProducts.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var App =
-/*#__PURE__*/
-function (_React$Component) {
-  _inherits(App, _React$Component);
-
-  function App(props) {
-    var _this;
-
-    _classCallCheck(this, App);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(App).call(this, props));
-    _this.state = {
-      pageToRender: _react.default.createElement(_selectProducts.default, {
-        togglePage: _this.toggleSelectProductPage
-      }),
-      showProductSelction: false,
-      showCheckout: false,
-      showOrderComplete: false // this.toggleSelectProductPage = this.toggleSelectProductPage.bind(this)
-
-    };
-    return _this;
-  }
-
-  _createClass(App, [{
-    key: "toggleSelectProductPage",
-    value: function toggleSelectProductPage() {
-      console.log('toggling product selection page');
-      this.setState({
-        pageToRender: _react.default.createElement(Checkout, null)
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return _react.default.createElement("div", {
-        className: "primary"
-      }, _react.default.createElement(_selectProducts.default, null));
-    }
-  }]);
-
   return App;
 }(_react.default.Component);
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById("app"));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","./components/selectProducts.js":"components/selectProducts.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","../database/bikerentals.js":"../database/bikerentals.js","bootstrap/dist/css/bootstrap.min.css":"../node_modules/bootstrap/dist/css/bootstrap.min.css","react-bootstrap":"../node_modules/react-bootstrap/es/index.js","./components/reviewReservation.js":"components/reviewReservation.js","./components/checkout.js":"components/checkout.js"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -53894,7 +53817,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58790" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60857" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
