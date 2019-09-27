@@ -53521,10 +53521,9 @@ function (_React$Component) {
         items.push(_react.default.createElement(_reactBootstrap.Carousel.Item, {
           key: i
         }, _react.default.createElement("img", {
-          className: "d-block w-100",
           src: _bikerentals.products[i].image,
           alt: "slide "
-        }), _react.default.createElement(_reactBootstrap.Carousel.Caption, null, _react.default.createElement("h3", null, _bikerentals.products[i].name), _react.default.createElement("p", null, "Nulla vitae elit libero, a pharetra augue mollis interdum."))));
+        }), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("br", null), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Carousel.Caption, null, _react.default.createElement("h4", null, _bikerentals.products[i].name), _react.default.createElement("p", null, "$", _bikerentals.products[i].price.toFixed(2))))));
       }
 
       return items;

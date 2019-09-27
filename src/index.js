@@ -43,17 +43,24 @@ class App extends React.Component {
         let items = []
         for (let i = 0; i < products.length; i++) {
             items.push(
-
                 <Carousel.Item key={i}>
                     <img
-                        className="d-block w-100"
                         src={products[i].image}
                         alt="slide "
                     />
+                    <br></br>
+                    <br></br>                    
+                    <br></br>
+                    <br></br>                    
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <div>
                     <Carousel.Caption>
-                        <h3>{products[i].name}</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        <h4>{products[i].name}</h4>
+                        <p>${products[i].price.toFixed(2)}</p>
                     </Carousel.Caption>
+                    </div>
                 </Carousel.Item>
 
             )
