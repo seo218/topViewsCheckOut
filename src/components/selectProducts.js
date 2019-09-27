@@ -16,7 +16,8 @@ class SelectProducts extends React.Component {
             totalPrice: `$${0}`,
             cartId: 0,
             showCart: false,
-            showCheckout: false
+            showCheckout: false,
+            showAlert: false
 
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
@@ -28,6 +29,8 @@ class SelectProducts extends React.Component {
         this.removeItemFromCart = this.removeItemFromCart.bind(this)
         this.toggleCartSummary = this.toggleCartSummary.bind(this)
         this.toggleCheckout = this.toggleCheckout.bind(this)
+        this.renderAlert = this.renderAlert.bind(this)
+        this.toggleAlert = this.toggleAlert.bind(this)
     }
 
 
@@ -100,7 +103,8 @@ class SelectProducts extends React.Component {
                 itemArray.push(itemToAdd)
                 this.setState({
                     items: itemArray,
-                    numberOfItems: itemToAdd.quantity
+                    numberOfItems: itemToAdd.quantity,
+                    totalPrice: this.updateTotal()
                 })
             } else {
                 if (this.state.quantity === undefined) {
@@ -172,13 +176,51 @@ class SelectProducts extends React.Component {
         })
     }
 
-    toggleCheckout() {
+    renderAlert() {
+        return (
+            <div>
+                <Modal.Header closeButton>
+                    <Modal.Title>Alert</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                <div>You must select at least one bike to proceed to checkout</div>
+                </Modal.Body>
+            </div>
+        )
+    }
+
+    toggleAlert() {
         this.setState({
-            showCart: !this.state.showCart,
-            showCheckout: !this.state.showCheckout
+            showAlert: !this.state.showAlert,
+            showCart: !this.state.showCart
         })
     }
-    
+    toggleCheckout() {
+        let hasBike = false
+
+        let cart = this.state.items
+        if (cart === undefined) {
+            this.toggleAlert()
+
+        } else {
+            for (let i = 0; i < cart.length; i++) {
+                if (this.state.items[i].product_type === "bike") {
+                    hasBike = true
+                }
+            }
+            if (hasBike) {
+                this.setState({
+                    showCart: !this.state.showCart,
+                    showCheckout: !this.state.showCheckout,
+                    totalPrice: this.updateTotal()
+                })
+
+            } else {
+                this.toggleAlert()
+            }
+        }
+    }
+
 
     render() {
         return (
@@ -222,7 +264,7 @@ class SelectProducts extends React.Component {
                                     Add to Cart
                         </Button>
                                 <br></br><br></br>
-                                <Button onClick={() => {this.toggleCartSummary()}}>
+                                <Button onClick={() => { this.toggleCartSummary() }}>
                                     View Cart
                                     </Button>
                             </Col>
@@ -241,7 +283,12 @@ class SelectProducts extends React.Component {
                     </div>
                     <div>
                         <Modal show={this.state.showCheckout}>
-                            <Checkout toggleCheckout={this.toggleCheckout}/>
+                            <Checkout toggleCheckout={this.toggleCheckout} />
+                        </Modal>
+                    </div>
+                    <div>
+                        <Modal show={this.state.showAlert} variant="danger" onHide={this.toggleAlert}>
+                            {this.renderAlert()}
                         </Modal>
                     </div>
                 </div>

@@ -53489,7 +53489,8 @@ function (_React$Component) {
       totalPrice: "$".concat(0),
       cartId: 0,
       showCart: false,
-      showCheckout: false
+      showCheckout: false,
+      showAlert: false
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
     _this.getProductSelectionItems = _this.getProductSelectionItems.bind(_assertThisInitialized(_this));
@@ -53500,6 +53501,8 @@ function (_React$Component) {
     _this.removeItemFromCart = _this.removeItemFromCart.bind(_assertThisInitialized(_this));
     _this.toggleCartSummary = _this.toggleCartSummary.bind(_assertThisInitialized(_this));
     _this.toggleCheckout = _this.toggleCheckout.bind(_assertThisInitialized(_this));
+    _this.renderAlert = _this.renderAlert.bind(_assertThisInitialized(_this));
+    _this.toggleAlert = _this.toggleAlert.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -53577,7 +53580,8 @@ function (_React$Component) {
           itemArray.push(itemToAdd);
           this.setState({
             items: itemArray,
-            numberOfItems: itemToAdd.quantity
+            numberOfItems: itemToAdd.quantity,
+            totalPrice: this.updateTotal()
           });
         } else {
           if (this.state.quantity === undefined) {
@@ -53662,12 +53666,45 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "renderAlert",
+    value: function renderAlert() {
+      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal.Header, {
+        closeButton: true
+      }, _react.default.createElement(_reactBootstrap.Modal.Title, null, "Alert")), _react.default.createElement(_reactBootstrap.Modal.Body, null, _react.default.createElement("div", null, "You must select at least one bike to proceed to checkout")));
+    }
+  }, {
+    key: "toggleAlert",
+    value: function toggleAlert() {
+      this.setState({
+        showAlert: !this.state.showAlert,
+        showCart: !this.state.showCart
+      });
+    }
+  }, {
     key: "toggleCheckout",
     value: function toggleCheckout() {
-      this.setState({
-        showCart: !this.state.showCart,
-        showCheckout: !this.state.showCheckout
-      });
+      var hasBike = false;
+      var cart = this.state.items;
+
+      if (cart === undefined) {
+        this.toggleAlert();
+      } else {
+        for (var i = 0; i < cart.length; i++) {
+          if (this.state.items[i].product_type === "bike") {
+            hasBike = true;
+          }
+        }
+
+        if (hasBike) {
+          this.setState({
+            showCart: !this.state.showCart,
+            showCheckout: !this.state.showCheckout,
+            totalPrice: this.updateTotal()
+          });
+        } else {
+          this.toggleAlert();
+        }
+      }
     }
   }, {
     key: "render",
@@ -53710,7 +53747,11 @@ function (_React$Component) {
         show: this.state.showCheckout
       }, _react.default.createElement(_checkout.default, {
         toggleCheckout: this.toggleCheckout
-      })))));
+      }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+        show: this.state.showAlert,
+        variant: "danger",
+        onHide: this.toggleAlert
+      }, this.renderAlert()))));
     }
   }]);
 
