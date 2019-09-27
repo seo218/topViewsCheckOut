@@ -1,8 +1,8 @@
 import React from 'react'
 import { products } from '../../database/bikerentals.js'
-import { Carousel, Form, Col, Button, Dropdown, Row } from 'react-bootstrap'
-import ReservationReview from './reviewReservation.js'
+import { Carousel, Form, Col, Button, Dropdown, Row, Modal } from 'react-bootstrap'
 import ReviewReservation from './reviewReservation.js'
+import Checkout from './checkout.js'
 
 class SelectProducts extends React.Component {
     constructor(props) {
@@ -14,7 +14,8 @@ class SelectProducts extends React.Component {
             quantity: undefined,
             selectProducts: null,
             totalPrice: `$${0}`,
-            cartId: 0
+            cartId: 0,
+            showCart: false
 
         }
         this.getCarouselItems = this.getCarouselItems.bind(this)
@@ -23,8 +24,10 @@ class SelectProducts extends React.Component {
         this.addToCart = this.addToCart.bind(this)
         this.handleQuantityChange = this.handleQuantityChange.bind(this)
         this.updateTotal = this.updateTotal.bind(this)
-        this.removeItemfromCart = this.removeItemfromCart.bind(this)
+        this.removeItemFromCart = this.removeItemFromCart.bind(this)
+        this.toggleCartSummary = this.toggleCartSummary.bind(this)
     }
+
 
     getCarouselItems() {
         let items = []
@@ -80,8 +83,8 @@ class SelectProducts extends React.Component {
             let itemToAdd = JSON.parse(JSON.stringify(this.state.currentItem))
             itemToAdd.cartId = this.state.cartId
             // console.log('printind current item and item to add', this.state.currentItem, itemToAdd)
-            let newCartId = this.state.cartId 
-            newCartId ++
+            let newCartId = this.state.cartId
+            newCartId++
             this.setState({
                 cartId: newCartId
             })
@@ -117,7 +120,7 @@ class SelectProducts extends React.Component {
 
             }
         }
-        console.log(this.state.items, this.state.numberOfItems)
+        // console.log(this.state.items, this.state.numberOfItems)
     }
 
     handleQuantityChange() {
@@ -143,25 +146,28 @@ class SelectProducts extends React.Component {
         }
     }
 
-    removeItemfromCart(itemIndx) {
-        if (this.state.items === undefined) {
-            console.log('cart is empty')
-        } else {
-            let cart = this.state.items
-        }
+    removeItemFromCart(cartId) {
         let newCart = this.state.items
-        newCart.splice(itemIndx, 1)
-        // console.log('printing new cart', newCart)
-        let stateUpdate = () => {
-            return new Promise((resolve, reject) => {
-                resolve(
-                    this.setState({
-                        items: newCart,
-                        numberOfItems: this.state.items.length
-                    })
-                )
-            })
+        for (let i = 0; i < newCart.length; i++) {
+            if (newCart[i].cartId === cartId) {
+                newCart.splice(i, 1)
+            }
         }
+        let numberOfItems = 0
+        for (let i = 0; i < newCart.length; i++) {
+            numberOfItems += parseInt(newCart[i].quantity)
+        }
+        this.setState({
+            items: newCart,
+            totalPrice: this.updateTotal(),
+            numberOfItems: numberOfItems
+        })
+    }
+
+    toggleCartSummary() {
+        this.setState({
+            showCart: !this.state.showCart
+        })
     }
 
     render() {
@@ -205,21 +211,26 @@ class SelectProducts extends React.Component {
                                 >
                                     Add to Cart
                         </Button>
-                                <br></br>
-                                {/* <Button onCLick={() => { }}>
+                                <br></br><br></br>
+                                <Button onClick={() => {this.toggleCartSummary()}}>
                                     View Cart
-                                    </Button> */}
+                                    </Button>
                             </Col>
                         </Row>
                     </Form>
+                    <div className="reservationReview">
+                        <Modal show={this.state.showCart} >
+                            <ReviewReservation
+                                cart={this.state.items}
+                                total={this.state.totalPrice}
+                                removeFromCart={this.removeItemFromCart}
+                                toggle={this.toggleCartSummary}
+                            />
+                        </Modal>
+                    </div>
                 </div>
-                <br></br>
-                <div className="reservationReview">
-                    <ReviewReservation
-                        cart={this.state.items}
-                        total={this.state.totalPrice}
-                    />
-                </div>
+
+
             </div>
         )
     }

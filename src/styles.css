@@ -1,6 +1,7 @@
 .primary {
   text-align: center;
-  padding: 4%
+  padding: 4%;
+  background: black
 }
 
 .productSelectionPage {
@@ -45,5 +46,16 @@
 
    .emptyCart {
      position: relative;
+     text-align: center
+   }
+
+   .checkOut {
+     text-align: center;
+     padding: 2%;
+     color: aquamarine
+   }
+
+   .cartSummary {
+     color: black;
      text-align: center
    }

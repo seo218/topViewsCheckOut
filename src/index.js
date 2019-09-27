@@ -23,7 +23,7 @@ class App extends React.Component {
         this.toggleSelectProduct = this.toggleSelectProduct.bind(this)
         this.toggleReviewReservation = this.toggleReviewReservation.bind(this)
         this.toggleCheckout = this.toggleCheckout.bind(this)
-        
+
     }
     componentWillMount() {
         this.setPages()
@@ -66,7 +66,6 @@ class App extends React.Component {
         return (
             <div className="primary">
                 <SelectProducts togglePage={this.toggleSelectProduct} />
-                {/* <ReviewReservation/> */}
             </div>
         )
     }
