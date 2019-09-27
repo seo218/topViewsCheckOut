@@ -295,7 +295,7 @@ class App extends React.Component {
                         </Row>
                     </Form>
                     <div className="reservationReview">
-                        <Modal show={this.state.showCart} onHide={this.toggleCartSummary}>
+                        <Modal show={this.state.showCart} onHide={this.toggleCartSummary} centered>
                             <ReviewReservation
                                 cart={this.state.items}
                                 total={this.state.totalPrice}
@@ -307,7 +307,7 @@ class App extends React.Component {
                         </Modal>
                     </div>
                     <div>
-                        <Modal show={this.state.showCheckout}>
+                        <Modal show={this.state.showCheckout} centered >
                             <Checkout 
                                 toggleCheckout={this.toggleCheckout}
                                 toggleOrderComplete={this.toggleOrderComplete}
@@ -319,6 +319,7 @@ class App extends React.Component {
                             className="alert"
                             show={this.state.showAlert}  
                             onHide={this.toggleAlert}
+                            centered
                         >
                             {this.renderAlert()}
                         </Modal>
@@ -332,6 +333,7 @@ class App extends React.Component {
                                     showOrderComplete: !this.state.showOrderComplete
                                 })
                             }}
+                            centered
                         >
                             {this.renderOrderCompleteAlert()}
                         </Modal>

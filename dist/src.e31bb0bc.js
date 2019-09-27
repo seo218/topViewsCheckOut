@@ -53757,7 +53757,8 @@ function (_React$Component) {
         className: "reservationReview"
       }, _react.default.createElement(_reactBootstrap.Modal, {
         show: this.state.showCart,
-        onHide: this.toggleCartSummary
+        onHide: this.toggleCartSummary,
+        centered: true
       }, _react.default.createElement(_reviewReservation.default, {
         cart: this.state.items,
         total: this.state.totalPrice,
@@ -53765,14 +53766,16 @@ function (_React$Component) {
         toggleSummary: this.toggleCartSummary,
         toggleCheckout: this.toggleCheckout
       }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
-        show: this.state.showCheckout
+        show: this.state.showCheckout,
+        centered: true
       }, _react.default.createElement(_checkout.default, {
         toggleCheckout: this.toggleCheckout,
         toggleOrderComplete: this.toggleOrderComplete
       }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         className: "alert",
         show: this.state.showAlert,
-        onHide: this.toggleAlert
+        onHide: this.toggleAlert,
+        centered: true
       }, this.renderAlert())), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         className: "orderComplete",
         show: this.state.showOrderComplete,
@@ -53780,7 +53783,8 @@ function (_React$Component) {
           _this3.setState({
             showOrderComplete: !_this3.state.showOrderComplete
           });
-        }
+        },
+        centered: true
       }, this.renderOrderCompleteAlert()))));
     }
   }]);
@@ -53817,7 +53821,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60857" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62567" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
