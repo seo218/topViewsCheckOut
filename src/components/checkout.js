@@ -32,22 +32,22 @@ class Checkout extends React.Component {
               </Form.Label>
               <br></br>
               <Form.Label>
-                Name On Card
+                Name 
               </Form.Label>
-              <Form.Control placeholder="name on card" />
+              <Form.Control placeholder="as appears on card" />
             </Form.Group>
            
             <Form.Group>
               <Form.Label>
-                Street Address 1
+                Street address 1
               </Form.Label>
-              <Form.Control placeholder="street Address" />
+              <Form.Control placeholder="street address" />
             </Form.Group>
          
             <Form.Row>
             <Form.Group as={Col} md="7">
               <Form.Label>
-                Street Address 2
+                Street address 2
               </Form.Label>
               <Form.Control placeholder="apt, suite, etc" />
             </Form.Group>
@@ -70,7 +70,7 @@ class Checkout extends React.Component {
             <Form.Row>
             <Form.Group as={Col} md="9">
               <Form.Label>
-                Credit Cart Number
+                Credit card number
               </Form.Label>
               <Form.Control placeholder="credit card number" />
 

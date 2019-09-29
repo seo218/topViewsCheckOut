@@ -308,7 +308,10 @@ class App extends React.Component {
                         </Modal>
                     </div>
                     <div className="checkOut">
-                        <Modal show={this.state.showCheckout} centered >
+                        <Modal 
+                            show={this.state.showCheckout} 
+                            centered 
+                            >
                             <Checkout 
                                 toggleCheckout={this.toggleCheckout}
                                 toggleOrderComplete={this.toggleOrderComplete}

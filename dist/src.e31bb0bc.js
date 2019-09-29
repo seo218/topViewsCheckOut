@@ -47532,14 +47532,14 @@ function (_React$Component) {
 
       return _react.default.createElement("div", null, _react.default.createElement("div", {
         className: "checkOut"
-      }, _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, _react.default.createElement("h3", null, " Billing info")), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Name On Card"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        placeholder: "name on card"
-      })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Street Address 1"), _react.default.createElement(_reactBootstrap.Form.Control, {
-        placeholder: "street Address"
+      }, _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, _react.default.createElement("h3", null, " Billing info")), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Form.Label, null, "Name"), _react.default.createElement(_reactBootstrap.Form.Control, {
+        placeholder: "as appears on card"
+      })), _react.default.createElement(_reactBootstrap.Form.Group, null, _react.default.createElement(_reactBootstrap.Form.Label, null, "Street address 1"), _react.default.createElement(_reactBootstrap.Form.Control, {
+        placeholder: "street address"
       })), _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
         as: _reactBootstrap.Col,
         md: "7"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Street Address 2"), _react.default.createElement(_reactBootstrap.Form.Control, {
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Street address 2"), _react.default.createElement(_reactBootstrap.Form.Control, {
         placeholder: "apt, suite, etc"
       })), _react.default.createElement(_reactBootstrap.Form.Group, {
         as: _reactBootstrap.Col,
@@ -47554,7 +47554,7 @@ function (_React$Component) {
       }))), _react.default.createElement(_reactBootstrap.Form.Row, null, _react.default.createElement(_reactBootstrap.Form.Group, {
         as: _reactBootstrap.Col,
         md: "9"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Credit Cart Number"), _react.default.createElement(_reactBootstrap.Form.Control, {
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Credit card number"), _react.default.createElement(_reactBootstrap.Form.Control, {
         placeholder: "credit card number"
       })), _react.default.createElement(_reactBootstrap.Form.Group, {
         as: _reactBootstrap.Col,
