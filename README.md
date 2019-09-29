@@ -2,9 +2,6 @@
 
 A mock check out page
 
-*Make your a bike reservation*
-
-
 [click here to see live page](http://bit.ly/checkout9292019)
 
 
@@ -18,7 +15,7 @@ A mock check out page
 ## Functionality: 
 
 - Products are displayed in an image carousel
-- Scroll through images by clicking them, using the arrows, or clicking a corresponding image bar
+- Scroll through images using the arrows or clicking a corresponding image bar
 - Use dropdown to select a product
 - Enter a number to select the quantity of products 
 - Click the "add to cart" button to add it to your reservation
@@ -31,7 +28,6 @@ A mock check out page
 
 ## Requirements
 - Node v10.15.3
-
 
 ## Development
 
