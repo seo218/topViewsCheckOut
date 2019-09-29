@@ -36,6 +36,7 @@ class App extends React.Component {
         this.renderAlert = this.renderAlert.bind(this)
         this.toggleCheckoutAlert = this.toggleCheckoutAlert.bind(this)
         this.toggleOrderComplete = this.toggleOrderComplete.bind(this)
+        this.enterPressed = this.enterPressed.bind(this)
     }
 
 
@@ -153,7 +154,7 @@ class App extends React.Component {
 
     updateTotal() {
         if (this.state.items === undefined || this.state.items.length === 0) {
-            console.log('cart is empty')
+            console.log()
         } else {
             let total = 0
             let cart = this.state.items
@@ -240,6 +241,12 @@ class App extends React.Component {
         })
     }
 
+    enterPressed(event) {
+        var code = event.keyCode || event.which;
+        if(code === 13) { 
+            this.addToCart()
+        } 
+    }
 
     render() {
         return (
@@ -270,15 +277,14 @@ class App extends React.Component {
                                             placeholder="number of items"
                                             className="round"
                                             onChange={this.handleQuantityChange}
+                                            onKeyPress={this.enterPressed}
                                         >
                                         </input>
                                     </span>
                                 </div>
                                 <br></br>
                                 <Button
-                                    onClick={() => {
-                                        this.addToCart();
-                                    }}
+                                    onClick={() => {this.addToCart()}}
                                 >
                                     Add to Cart
                         </Button>

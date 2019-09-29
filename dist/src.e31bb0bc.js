@@ -53509,6 +53509,7 @@ function (_React$Component) {
     _this.renderAlert = _this.renderAlert.bind(_assertThisInitialized(_this));
     _this.toggleCheckoutAlert = _this.toggleCheckoutAlert.bind(_assertThisInitialized(_this));
     _this.toggleOrderComplete = _this.toggleOrderComplete.bind(_assertThisInitialized(_this));
+    _this.enterPressed = _this.enterPressed.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -53628,7 +53629,7 @@ function (_React$Component) {
     key: "updateTotal",
     value: function updateTotal() {
       if (this.state.items === undefined || this.state.items.length === 0) {
-        console.log('cart is empty');
+        console.log();
       } else {
         var total = 0;
         var cart = this.state.items;
@@ -53720,6 +53721,15 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "enterPressed",
+    value: function enterPressed(event) {
+      var code = event.keyCode || event.which;
+
+      if (code === 13) {
+        this.addToCart();
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -53736,7 +53746,8 @@ function (_React$Component) {
       }, this.state.currentItem.name), _react.default.createElement(_reactBootstrap.Dropdown.Menu, null, this.getProductSelectionItems())), _react.default.createElement("br", null), _react.default.createElement("div", null, _react.default.createElement("span", null, _react.default.createElement("input", {
         placeholder: "number of items",
         className: "round",
-        onChange: this.handleQuantityChange
+        onChange: this.handleQuantityChange,
+        onKeyPress: this.enterPressed
       }))), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Button, {
         onClick: function onClick() {
           _this3.addToCart();
