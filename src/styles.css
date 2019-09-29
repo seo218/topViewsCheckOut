@@ -11,13 +11,13 @@
 .productSelectionPage {
   text-align: center;
   padding: 3%;
-  /* color: aquamarine; */
+  color: aquamarine;
   height: auto 100%;
-  /* background: black;
-  -webkit-background-size: 100%;
-  -moz-background-size: 100%;
-  -o-background-size: 100%;
-  background-size: 100%; */
+  background: black; 
+  /* -webkit-background-size: 100%; */
+  /* -moz-background-size: 100%; */
+  /* -o-background-size: 100%; */
+  background-size: auto 100%;
  
 }
 
@@ -25,7 +25,6 @@
   text-align: center;
   position: relative;
   padding: 3%;
-    /* color: red */
 }
 
 .addToCart {
