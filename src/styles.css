@@ -1,9 +1,15 @@
 .productSelectionPage {
   text-align: center;
   padding: 3%;
-  background-size: auto 100%;
-  background: black;
   color: aquamarine;
+  background: black;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  overflow: hidden;
+ 
 }
 
 .carousel {
