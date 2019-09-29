@@ -1,13 +1,7 @@
-.primary {
-  text-align: center;
-  padding: 4%;
-  background: black
-}
-
 .productSelectionPage {
   text-align: center;
   padding: 3%;
-  background-size: 100% 100%;
+  background-size: auto 100%;
   background: black;
   color: aquamarine;
 }
