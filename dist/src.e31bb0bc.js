@@ -53486,14 +53486,15 @@ function (_React$Component) {
       currentItem: {
         name: "Select Product"
       },
-      numberOfItems: 0,
+      numberOfItemsTotal: 0,
       quantity: undefined,
       selectProducts: null,
       totalPrice: "$".concat(0),
       cartId: 0,
       showCart: false,
       showCheckout: false,
-      showAlert: false,
+      showSelectProductAlert: false,
+      showCheckoutAlert: false,
       showOrderComplete: false
     };
     _this.getCarouselItems = _this.getCarouselItems.bind(_assertThisInitialized(_this));
@@ -53506,8 +53507,7 @@ function (_React$Component) {
     _this.toggleCartSummary = _this.toggleCartSummary.bind(_assertThisInitialized(_this));
     _this.toggleCheckout = _this.toggleCheckout.bind(_assertThisInitialized(_this));
     _this.renderAlert = _this.renderAlert.bind(_assertThisInitialized(_this));
-    _this.toggleAlert = _this.toggleAlert.bind(_assertThisInitialized(_this));
-    _this.renderOrderCompleteAlert = _this.renderOrderCompleteAlert.bind(_assertThisInitialized(_this));
+    _this.toggleCheckoutAlert = _this.toggleCheckoutAlert.bind(_assertThisInitialized(_this));
     _this.toggleOrderComplete = _this.toggleOrderComplete.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -53563,11 +53563,12 @@ function (_React$Component) {
     key: "addToCart",
     value: function addToCart() {
       if (this.state.currentItem.name === "Select Product") {
-        console.log('no product selected');
+        this.setState({
+          showSelectProductAlert: !this.state.showSelectProductAlert
+        });
       } else {
         var itemToAdd = JSON.parse(JSON.stringify(this.state.currentItem));
-        itemToAdd.cartId = this.state.cartId; // console.log('printind current item and item to add', this.state.currentItem, itemToAdd)
-
+        itemToAdd.cartId = this.state.cartId;
         var newCartId = this.state.cartId;
         newCartId++;
         this.setState({
@@ -53585,7 +53586,7 @@ function (_React$Component) {
           itemArray.push(itemToAdd);
           this.setState({
             items: itemArray,
-            numberOfItems: itemToAdd.quantity,
+            numberOfItemsTotal: itemToAdd.quantity,
             totalPrice: this.updateTotal()
           });
         } else {
@@ -53605,12 +53606,11 @@ function (_React$Component) {
 
           this.setState({
             items: newItems,
-            numberOfItems: numberOfItems,
+            numberOfItemsTotal: numberOfItems,
             totalPrice: this.updateTotal()
           });
         }
-      } // console.log(this.state.items, this.state.numberOfItems)
-
+      }
     }
   }, {
     key: "handleQuantityChange",
@@ -53660,7 +53660,7 @@ function (_React$Component) {
       this.setState({
         items: newCart,
         totalPrice: this.updateTotal(),
-        numberOfItems: numberOfItems
+        numberOfItemsTotal: numberOfItems
       });
     }
   }, {
@@ -53672,16 +53672,16 @@ function (_React$Component) {
     }
   }, {
     key: "renderAlert",
-    value: function renderAlert() {
+    value: function renderAlert(message) {
       return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal.Header, {
         closeButton: true
-      }, _react.default.createElement(_reactBootstrap.Modal.Title, null, "Alert")), _react.default.createElement(_reactBootstrap.Modal.Body, null, _react.default.createElement("div", null, "You must select at least one bike to proceed to checkout")));
+      }, _react.default.createElement(_reactBootstrap.Modal.Title, null, "Alert")), _react.default.createElement(_reactBootstrap.Modal.Body, null, _react.default.createElement("div", null, message)));
     }
   }, {
-    key: "toggleAlert",
-    value: function toggleAlert() {
+    key: "toggleCheckoutAlert",
+    value: function toggleCheckoutAlert() {
       this.setState({
-        showAlert: !this.state.showAlert,
+        showCheckoutAlert: !this.state.showCheckoutAlert,
         showCart: !this.state.showCart
       });
     }
@@ -53692,7 +53692,7 @@ function (_React$Component) {
       var cart = this.state.items;
 
       if (cart === undefined) {
-        this.toggleAlert();
+        this.toggleCheckoutAlert();
       } else {
         for (var i = 0; i < cart.length; i++) {
           if (this.state.items[i].product_type === "bike") {
@@ -53707,16 +53707,9 @@ function (_React$Component) {
             totalPrice: this.updateTotal()
           });
         } else {
-          this.toggleAlert();
+          this.toggleCheckoutAlert();
         }
       }
-    }
-  }, {
-    key: "renderOrderCompleteAlert",
-    value: function renderOrderCompleteAlert() {
-      return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal.Header, {
-        closeButton: true
-      }), _react.default.createElement(_reactBootstrap.Modal.Body, null, _react.default.createElement("div", null, "Congratulations your order is complete")));
     }
   }, {
     key: "toggleOrderComplete",
@@ -53737,7 +53730,7 @@ function (_React$Component) {
         className: "carousel"
       }, _react.default.createElement(_reactBootstrap.Carousel, null, this.getCarouselItems())), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Form, null, _react.default.createElement(_reactBootstrap.Row, null, _react.default.createElement(_reactBootstrap.Col, {
         className: "addToCart"
-      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Cart ( ", this.state.numberOfItems, " Items )"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Dropdown, null, _react.default.createElement(_reactBootstrap.Dropdown.Toggle, {
+      }, _react.default.createElement(_reactBootstrap.Form.Label, null, "Cart ( ", this.state.numberOfItemsTotal, " Items )"), _react.default.createElement("br", null), _react.default.createElement(_reactBootstrap.Dropdown, null, _react.default.createElement(_reactBootstrap.Dropdown.Toggle, {
         variant: "success",
         id: "dropdown-basic"
       }, this.state.currentItem.name), _react.default.createElement(_reactBootstrap.Dropdown.Menu, null, this.getProductSelectionItems())), _react.default.createElement("br", null), _react.default.createElement("div", null, _react.default.createElement("span", null, _react.default.createElement("input", {
@@ -53772,10 +53765,10 @@ function (_React$Component) {
         toggleOrderComplete: this.toggleOrderComplete
       }))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         className: "alert",
-        show: this.state.showAlert,
-        onHide: this.toggleAlert,
+        show: this.state.showCheckoutAlert,
+        onHide: this.toggleCheckoutAlert,
         centered: true
-      }, this.renderAlert())), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+      }, this.renderAlert('You must select at least one bike'))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         className: "orderComplete",
         show: this.state.showOrderComplete,
         onHide: function onHide() {
@@ -53784,7 +53777,15 @@ function (_React$Component) {
           });
         },
         centered: true
-      }, this.renderOrderCompleteAlert()))));
+      }, this.renderAlert('Congratulations your order is complete'))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+        show: this.state.showSelectProductAlert,
+        onHide: function onHide() {
+          _this3.setState({
+            showSelectProductAlert: !_this3.state.showSelectProductAlert
+          });
+        },
+        centered: true
+      }, this.renderAlert('Please select a product')))));
     }
   }]);
 

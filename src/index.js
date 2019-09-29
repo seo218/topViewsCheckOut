@@ -12,14 +12,15 @@ class App extends React.Component {
         this.state = {
             items: undefined,
             currentItem: { name: "Select Product" },
-            numberOfItems: 0,
+            numberOfItemsTotal: 0,
             quantity: undefined,
             selectProducts: null,
             totalPrice: `$${0}`,
             cartId: 0,
             showCart: false,
             showCheckout: false,
-            showAlert: false,
+            showSelectProductAlert: false,
+            showCheckoutAlert: false,
             showOrderComplete: false
 
         }
@@ -33,8 +34,7 @@ class App extends React.Component {
         this.toggleCartSummary = this.toggleCartSummary.bind(this)
         this.toggleCheckout = this.toggleCheckout.bind(this)
         this.renderAlert = this.renderAlert.bind(this)
-        this.toggleAlert = this.toggleAlert.bind(this)
-        this.renderOrderCompleteAlert = this.renderOrderCompleteAlert.bind(this)
+        this.toggleCheckoutAlert = this.toggleCheckoutAlert.bind(this)
         this.toggleOrderComplete = this.toggleOrderComplete.bind(this)
     }
 
@@ -95,18 +95,19 @@ class App extends React.Component {
 
     addToCart() {
         if (this.state.currentItem.name === "Select Product") {
-            console.log('no product selected')
+            this.setState({
+                showSelectProductAlert: !this.state.showSelectProductAlert
+            })
         } else {
             let itemToAdd = JSON.parse(JSON.stringify(this.state.currentItem))
             itemToAdd.cartId = this.state.cartId
-            // console.log('printind current item and item to add', this.state.currentItem, itemToAdd)
             let newCartId = this.state.cartId
             newCartId++
             this.setState({
                 cartId: newCartId
             })
             if (this.state.items === undefined) {
-                if (this.state.quantity === undefined) {
+                if (this.state.quantity === undefined  ) {
                     itemToAdd.quantity = 1
                 } else {
                     itemToAdd.quantity = this.state.quantity
@@ -115,11 +116,11 @@ class App extends React.Component {
                 itemArray.push(itemToAdd)
                 this.setState({
                     items: itemArray,
-                    numberOfItems: itemToAdd.quantity,
+                    numberOfItemsTotal: itemToAdd.quantity,
                     totalPrice: this.updateTotal()
                 })
             } else {
-                if (this.state.quantity === undefined) {
+                if (this.state.quantity === undefined  ) {
                     itemToAdd.quantity = 1
                 } else {
                     itemToAdd.quantity = this.state.quantity
@@ -132,13 +133,12 @@ class App extends React.Component {
                 }
                 this.setState({
                     items: newItems,
-                    numberOfItems: numberOfItems,
+                    numberOfItemsTotal: numberOfItems,
                     totalPrice: this.updateTotal()
                 })
 
             }
         }
-        // console.log(this.state.items, this.state.numberOfItems)
     }
 
     handleQuantityChange() {
@@ -178,7 +178,7 @@ class App extends React.Component {
         this.setState({
             items: newCart,
             totalPrice: this.updateTotal(),
-            numberOfItems: numberOfItems
+            numberOfItemsTotal: numberOfItems
         })
     }
 
@@ -188,22 +188,22 @@ class App extends React.Component {
         })
     }
 
-    renderAlert() {
+    renderAlert(message) {
         return (
             <div>
                 <Modal.Header closeButton>
                     <Modal.Title>Alert</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                <div>You must select at least one bike to proceed to checkout</div>
+                <div>{message}</div>
                 </Modal.Body>
             </div>
         )
     }
 
-    toggleAlert() {
+    toggleCheckoutAlert() {
         this.setState({
-            showAlert: !this.state.showAlert,
+            showCheckoutAlert: !this.state.showCheckoutAlert,
             showCart: !this.state.showCart
         })
     }
@@ -212,7 +212,7 @@ class App extends React.Component {
 
         let cart = this.state.items
         if (cart === undefined) {
-            this.toggleAlert()
+            this.toggleCheckoutAlert()
 
         } else {
             for (let i = 0; i < cart.length; i++) {
@@ -228,21 +228,9 @@ class App extends React.Component {
                 })
 
             } else {
-                this.toggleAlert()
+                this.toggleCheckoutAlert()
             }
         }
-    }
-
-    renderOrderCompleteAlert() {
-        return (
-            <div>
-                <Modal.Header closeButton>
-                </Modal.Header>
-                <Modal.Body>
-                <div>Congratulations your order is complete</div>
-                </Modal.Body>
-            </div>
-        )
     }
     
     toggleOrderComplete() {
@@ -265,7 +253,7 @@ class App extends React.Component {
                     <Form>
                         <Row>
                             <Col className="addToCart">
-                                <Form.Label>Cart ( {this.state.numberOfItems} Items )</Form.Label>
+                                <Form.Label>Cart ( {this.state.numberOfItemsTotal} Items )</Form.Label>
                                 <br></br>
                                 <Dropdown>
                                     <Dropdown.Toggle variant="success" id="dropdown-basic" >
@@ -324,11 +312,11 @@ class App extends React.Component {
                     <div>
                         <Modal 
                             className="alert"
-                            show={this.state.showAlert}  
-                            onHide={this.toggleAlert}
+                            show={this.state.showCheckoutAlert}  
+                            onHide={this.toggleCheckoutAlert}
                             centered
                         >
-                            {this.renderAlert()}
+                            {this.renderAlert('You must select at least one bike')}
                         </Modal>
                     </div>
                     <div>
@@ -342,7 +330,20 @@ class App extends React.Component {
                             }}
                             centered
                         >
-                            {this.renderOrderCompleteAlert()}
+                            {this.renderAlert('Congratulations your order is complete')}
+                        </Modal>
+                    </div>
+                    <div>
+                        <Modal 
+                            show={this.state.showSelectProductAlert} 
+                            onHide={() => {
+                                this.setState({
+                                    showSelectProductAlert: !this.state.showSelectProductAlert
+                                })
+                            }}
+                            centered
+                        >
+                            {this.renderAlert('Please select a product')}
                         </Modal>
                     </div>
                 </div>
