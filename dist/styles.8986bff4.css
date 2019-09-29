@@ -7,8 +7,9 @@
 .productSelectionPage {
   text-align: center;
   padding: 3%;
+  background-size: 100%;
   background:black;
-  color: aquamarine
+  color: aquamarine;
 }
 
 .carousel {
