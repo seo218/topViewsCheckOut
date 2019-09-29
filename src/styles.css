@@ -2,7 +2,7 @@
   text-align: center;
   padding: 3%;
   color: aquamarine;
-  background: black;
+  background: black no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
