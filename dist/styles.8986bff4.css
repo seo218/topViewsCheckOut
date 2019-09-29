@@ -12,9 +12,12 @@
   text-align: center;
   padding: 3%;
   color: aquamarine;
-  background: black;
   height: auto 100%;
-  overflow: hidden;
+  background: black;
+  -webkit-background-size: 100%;
+  -moz-background-size: 100%;
+  -o-background-size: 100%;
+  background-size: 100%;
  
 }
 
