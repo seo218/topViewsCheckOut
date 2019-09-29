@@ -145,7 +145,6 @@ class App extends React.Component {
     handleQuantityChange() {
         let quantity = event.target.value
         if (quantity > 0 && quantity % 1 === 0) {
-            // console.log(this.state.quantity)
             this.setState({
                 quantity: quantity
             })
@@ -208,6 +207,7 @@ class App extends React.Component {
             showCart: !this.state.showCart
         })
     }
+
     toggleCheckout() {
         let hasBike = false
 
@@ -307,7 +307,7 @@ class App extends React.Component {
                             />
                         </Modal>
                     </div>
-                    <div>
+                    <div className="checkOut">
                         <Modal show={this.state.showCheckout} centered >
                             <Checkout 
                                 toggleCheckout={this.toggleCheckout}
@@ -315,9 +315,8 @@ class App extends React.Component {
                              />
                         </Modal>
                     </div>
-                    <div>
+                    <div className="checkOutAlert">
                         <Modal 
-                            className="alert"
                             show={this.state.showCheckoutAlert}  
                             onHide={this.toggleCheckoutAlert}
                             centered
@@ -325,9 +324,8 @@ class App extends React.Component {
                             {this.renderAlert('Alert','You must select at least one bike')}
                         </Modal>
                     </div>
-                    <div>
+                    <div className="orderComplete">
                         <Modal 
-                            className="orderComplete"
                             show={this.state.showOrderComplete} 
                             onHide={() => {
                                 this.setState({
@@ -339,7 +337,7 @@ class App extends React.Component {
                             {this.renderAlert('Congratulations', 'Your order is complete!')}
                         </Modal>
                     </div>
-                    <div>
+                    <div className="orderCompletAlert">
                         <Modal 
                             show={this.state.showSelectProductAlert} 
                             onHide={() => {

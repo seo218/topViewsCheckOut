@@ -1,83 +1,107 @@
 import React from 'react'
-import { products } from '../../database/bikerentals.js'
-import { InputGroup, FormControl, Modal, Button, Col, Row } from 'react-bootstrap'
-import Promise from 'bluebird'
+import { InputGroup, Form, Modal, Button, Col, Row } from 'react-bootstrap'
 
 class Checkout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      isValid: false
+    }
+    this.validate = this.validate.bind(this)
+  }
+
+  validate(event) {
+    isValid = event.currentTarget
+    if (isValid === false) {
+      event.prevent.Defualt()
+      event.stopPropagation()
+    } else {
+      this.props.toggleOrderComplete()
     }
   }
+
   render() {
     return (
       <div >
-       
-          <div className="checkOut">
-
-            Billing Info
-        <br></br>
-            <br></br>
-            <InputGroup>
-              <FormControl
-                placeholder="Name on card"
-              />
-            </InputGroup>
-            <br></br>
-            <InputGroup>
-              <FormControl
-                placeholder="Card Number"
-              />
-            </InputGroup>
-            
-            <br></br>
-            <InputGroup>
-              <FormControl
-                placeholder="Street Address"
-              />
-            </InputGroup>
-            <br></br>
-            <InputGroup>
-              <FormControl
-                placeholder="City"
-              />
-            </InputGroup>
-            <br></br>
-
-            <InputGroup>
-              <FormControl
-                placeholder="State"
-              />
-            </InputGroup>
-            <br></br>
-
-            <InputGroup>
-              <FormControl
-                placeholder="Zip"
-              />
-            </InputGroup>
-            <br></br>
-            <InputGroup>
-              <FormControl
-                placeholder="cvc"
-              />
-            </InputGroup>
-          </div>
+        <div className="checkOut">
           <br></br>
-          <Modal.Footer>
-          <Button 
-              variant="secondary"
-              onClick={() => {this.props.toggleCheckout()}}
-            >
-                  Review Order
-          </Button>  
-          <Button 
-            onClick={() => {this.props.toggleOrderComplete()}}
+          <Form>
+            <Form.Group>
+              <Form.Label>
+                <h3> Billing info</h3>
+              </Form.Label>
+              <br></br>
+              <Form.Label>
+                Name On Card
+              </Form.Label>
+              <Form.Control placeholder="name on card" />
+            </Form.Group>
+           
+            <Form.Group>
+              <Form.Label>
+                Street Address 1
+              </Form.Label>
+              <Form.Control placeholder="street Address" />
+            </Form.Group>
+         
+            <Form.Row>
+            <Form.Group as={Col} md="7">
+              <Form.Label>
+                Street Address 2
+              </Form.Label>
+              <Form.Control placeholder="apt, suite, etc" />
+            </Form.Group>
+
+            <Form.Group as={Col} md="2">
+            <Form.Label>
+              State
+              </Form.Label>
+            <Form.Control placeholder="state" />
+            </Form.Group>
+
+            <Form.Group as={Col} md="3">
+              <Form.Label>
+                Zip
+              </Form.Label>
+              <Form.Control placeholder="zip code" />
+            </Form.Group>
+            </Form.Row>
+
+            <Form.Row>
+            <Form.Group as={Col} md="9">
+              <Form.Label>
+                Credit Cart Number
+              </Form.Label>
+              <Form.Control placeholder="credit card number" />
+
+            </Form.Group><Form.Group as={Col} md="3">
+              <Form.Label>
+                CVC
+              </Form.Label>
+              <Form.Control placeholder="cvc" />
+            </Form.Group>
+            </Form.Row>
+
+          </Form>
+          <br></br>
+
+        </div>
+        <br></br>
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => { this.props.toggleCheckout() }}
           >
-                  Complete purchase
+            Review Order
           </Button>
-          </Modal.Footer>
-  
+          <Button
+            onClick={() => { this.props.toggleOrderComplete() }}
+          >
+            Complete purchase
+          </Button>
+
+        </Modal.Footer>
+
       </div>
     )
   }

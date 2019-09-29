@@ -16,6 +16,8 @@
     "express": "^4.17.1",
     "jquery": "^3.4.1",
     "morgan": "^1.9.1",
+    "nodemon": "^1.19.1",
+    "parcel": "^1.5.1",
     "react": "^16.8.6",
     "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.8.6"

@@ -25,7 +25,6 @@ class ReviewReservation extends React.Component {
       );
 
       let cart = this.props.cart
-      // console.log(cart)
       let cartArray = []
       for (let i = 0; i < cart.length; i++) {
         cartArray.push(
