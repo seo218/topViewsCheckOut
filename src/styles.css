@@ -1,13 +1,22 @@
-.productSelectionPage {
-  text-align: center;
-  padding: 3%;
-  color: aquamarine;
+.app {
   background: black no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
+  overflow: hidden;
+}
+
+
+
+
+.productSelectionPage {
+  text-align: center;
+  padding: 3%;
+  color: aquamarine;
+  background: black;
+  height: auto 100%;
   overflow: hidden;
  
 }
