@@ -53672,10 +53672,10 @@ function (_React$Component) {
     }
   }, {
     key: "renderAlert",
-    value: function renderAlert(message) {
+    value: function renderAlert(title, message) {
       return _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal.Header, {
         closeButton: true
-      }, _react.default.createElement(_reactBootstrap.Modal.Title, null, "Alert")), _react.default.createElement(_reactBootstrap.Modal.Body, null, _react.default.createElement("div", null, message)));
+      }, _react.default.createElement("h3", null, title)), _react.default.createElement(_reactBootstrap.Modal.Body, null, message));
     }
   }, {
     key: "toggleCheckoutAlert",
@@ -53768,7 +53768,7 @@ function (_React$Component) {
         show: this.state.showCheckoutAlert,
         onHide: this.toggleCheckoutAlert,
         centered: true
-      }, this.renderAlert('You must select at least one bike'))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+      }, this.renderAlert('Alert', 'You must select at least one bike'))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         className: "orderComplete",
         show: this.state.showOrderComplete,
         onHide: function onHide() {
@@ -53777,7 +53777,7 @@ function (_React$Component) {
           });
         },
         centered: true
-      }, this.renderAlert('Congratulations your order is complete'))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
+      }, this.renderAlert('Congratulations', 'Your order is complete!'))), _react.default.createElement("div", null, _react.default.createElement(_reactBootstrap.Modal, {
         show: this.state.showSelectProductAlert,
         onHide: function onHide() {
           _this3.setState({
@@ -53785,7 +53785,7 @@ function (_React$Component) {
           });
         },
         centered: true
-      }, this.renderAlert('Please select a product')))));
+      }, this.renderAlert('Alert', 'Please select a product')))));
     }
   }]);
 

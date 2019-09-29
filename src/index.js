@@ -188,14 +188,14 @@ class App extends React.Component {
         })
     }
 
-    renderAlert(message) {
+    renderAlert(title, message) {
         return (
             <div>
                 <Modal.Header closeButton>
-                    <Modal.Title>Alert</Modal.Title>
+                    <h3>{title}</h3>
                 </Modal.Header>
                 <Modal.Body>
-                <div>{message}</div>
+                {message}
                 </Modal.Body>
             </div>
         )
@@ -316,7 +316,7 @@ class App extends React.Component {
                             onHide={this.toggleCheckoutAlert}
                             centered
                         >
-                            {this.renderAlert('You must select at least one bike')}
+                            {this.renderAlert('Alert','You must select at least one bike')}
                         </Modal>
                     </div>
                     <div>
@@ -330,7 +330,7 @@ class App extends React.Component {
                             }}
                             centered
                         >
-                            {this.renderAlert('Congratulations your order is complete')}
+                            {this.renderAlert('Congratulations', 'Your order is complete!')}
                         </Modal>
                     </div>
                     <div>
@@ -343,7 +343,7 @@ class App extends React.Component {
                             }}
                             centered
                         >
-                            {this.renderAlert('Please select a product')}
+                            {this.renderAlert('Alert', 'Please select a product')}
                         </Modal>
                     </div>
                 </div>
