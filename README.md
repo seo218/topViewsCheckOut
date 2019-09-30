@@ -16,11 +16,9 @@ A mock check out page
 
 ## Functionality: 
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/MUQfKFzIOeU" 
-frameborder="0" 
-allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-allowfullscreen></iframe>
+<div align="center">
+  <a href="https://video.drift.com/v/abXnwYp36co"><img src="https://video.drift.com/v/abXnwYp36co"></a>
+</div>
 
 [CLICK HERE to watch website features](https://video.drift.com/v/abXnwYp36co/)
 
