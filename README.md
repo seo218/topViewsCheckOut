@@ -2,6 +2,8 @@
 
 A mock check out page
 
+![interface](database/readme.gif)
+
 [click here to see live page](http://bit.ly/checkout9292019)
 
 
@@ -12,11 +14,7 @@ A mock check out page
 3. [Development](#Development)
 
 
-
-
 ## Functionality: 
-
-[CLICK HERE to watch website features](https://video.drift.com/v/abXnwYp36co/)
 
 - Products are displayed in an image carousel
 - Scroll through images using the arrows or clicking a corresponding image bar
