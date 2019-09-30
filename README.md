@@ -11,11 +11,18 @@ A mock check out page
 2. [Requirements](#Requirements)
 3. [Development](#Development)
 
-[<img src="https://video.drift.com/v/abXnwYp36co/" width="50%">](https://video.drift.com/v/abXnwYp36co/)
 
 
 
 ## Functionality: 
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/MUQfKFzIOeU" 
+frameborder="0" 
+allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
+allowfullscreen></iframe>
+
+[CLICK HERE to watch website features](https://video.drift.com/v/abXnwYp36co/)
 
 - Products are displayed in an image carousel
 - Scroll through images using the arrows or clicking a corresponding image bar
