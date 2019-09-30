@@ -11,6 +11,7 @@ A mock check out page
 2. [Requirements](#Requirements)
 3. [Development](#Development)
 
+https://video.drift.com/v/abXnwYp36co/
 
 ## Functionality: 
 
