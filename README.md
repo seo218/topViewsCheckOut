@@ -1,4 +1,4 @@
-# TopView Bike Rentals
+# Top View Bike Rentals
 
 A mock check out page
 
