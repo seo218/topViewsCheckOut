@@ -16,10 +16,6 @@ A mock check out page
 
 ## Functionality: 
 
-<div align="center">
-  <a href="https://video.drift.com/v/abXnwYp36co"><img src="https://video.drift.com/v/abXnwYp36co"></a>
-</div>
-
 [CLICK HERE to watch website features](https://video.drift.com/v/abXnwYp36co/)
 
 - Products are displayed in an image carousel
