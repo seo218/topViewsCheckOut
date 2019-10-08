@@ -1,10 +1,12 @@
+const maleBike = require('../database/maleBike.jpg')
+let storage = ["http://drive.google.com/uc?export=view&id=1KmwZUDDZ7GMiQRmdyzo5vG-pqb_2HkCb"]
 
 const products =  [
       {
         "id": 1,
         "name": "Adult Male Bike",
         "price": 20.50,
-        "image": "http://drive.google.com/uc?export=view&id=1KmwZUDDZ7GMiQRmdyzo5vG-pqb_2HkCb",
+        "image": maleBike,
         "product_type": "bike"
       },
       {

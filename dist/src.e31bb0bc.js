@@ -30609,12 +30609,17 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../database/bikerentals.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../database/maleBike.jpg":[function(require,module,exports) {
+module.exports = "/maleBike.a76a9fc0.jpg";
+},{}],"../database/bikerentals.js":[function(require,module,exports) {
+var maleBike = require('../database/maleBike.jpg');
+
+var storage = ["http://drive.google.com/uc?export=view&id=1KmwZUDDZ7GMiQRmdyzo5vG-pqb_2HkCb"];
 var products = [{
   "id": 1,
   "name": "Adult Male Bike",
   "price": 20.50,
-  "image": "http://drive.google.com/uc?export=view&id=1KmwZUDDZ7GMiQRmdyzo5vG-pqb_2HkCb",
+  "image": maleBike,
   "product_type": "bike"
 }, {
   "id": 2,
@@ -30650,7 +30655,7 @@ var products = [{
 module.exports = {
   products: products
 };
-},{}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"../database/maleBike.jpg":"../database/maleBike.jpg"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -47983,7 +47988,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61320" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57770" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
