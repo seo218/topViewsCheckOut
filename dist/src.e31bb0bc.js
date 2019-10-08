@@ -30611,10 +30611,30 @@ if ("development" === 'production') {
 }
 },{"./cjs/react-dom.development.js":"../node_modules/react-dom/cjs/react-dom.development.js"}],"../database/maleBike.jpg":[function(require,module,exports) {
 module.exports = "/maleBike.a76a9fc0.jpg";
+},{}],"../database/femaleBike.jpg":[function(require,module,exports) {
+module.exports = "/femaleBike.7545d46c.jpg";
+},{}],"../database/kidBike.jpg":[function(require,module,exports) {
+module.exports = "/kidBike.16f09472.jpg";
+},{}],"../database/adultHelmet.jpg":[function(require,module,exports) {
+module.exports = "/adultHelmet.226f54db.jpg";
+},{}],"../database/kidsHelmet.jpg":[function(require,module,exports) {
+module.exports = "/kidsHelmet.f2fc8698.jpg";
+},{}],"../database/insurance.jpg":[function(require,module,exports) {
+module.exports = "/insurance.312a7498.jpg";
 },{}],"../database/bikerentals.js":[function(require,module,exports) {
 var maleBike = require('../database/maleBike.jpg');
 
-var storage = ["http://drive.google.com/uc?export=view&id=1KmwZUDDZ7GMiQRmdyzo5vG-pqb_2HkCb"];
+var femaleBike = require('../database/femaleBike.jpg');
+
+var kidBike = require('../database/kidBike.jpg');
+
+var adultHelmet = require('../database/adultHelmet.jpg');
+
+var kidHelmet = require('../database/kidsHelmet.jpg');
+
+var insurance = require('../database/insurance.jpg');
+
+var storage = ["http://drive.google.com/uc?export=view&id=1KmwZUDDZ7GMiQRmdyzo5vG-pqb_2HkCb", "http://drive.google.com/uc?export=view&id=1oQBK_DsfTa6TXJL9OtMnDxs3R1VfpT7h", "http://drive.google.com/uc?export=view&id=1aJNHeIzaWyt6zTdZYhVev4oDv_qg7C-c", "http://drive.google.com/uc?export=view&id=1ZDzyHbMXoBegiF2_YZqZRg6HrqQwMWGh", "http://drive.google.com/uc?export=view&id=16DAt2ZOXN3Rjq2HlaoX-d-GJ5xT6Avq4", "http://drive.google.com/uc?export=view&id=1Jnw1d59DgofpaW8JIAzhyaZ96tv_rXqB"];
 var products = [{
   "id": 1,
   "name": "Adult Male Bike",
@@ -30625,37 +30645,37 @@ var products = [{
   "id": 2,
   "name": "Adult Female Bike",
   "price": 20.50,
-  "image": "http://drive.google.com/uc?export=view&id=1oQBK_DsfTa6TXJL9OtMnDxs3R1VfpT7h",
+  "image": femaleBike,
   "product_type": "bike"
 }, {
   "id": 3,
   "name": "Kids Unisex Bike",
   "price": 12.75,
-  "image": "http://drive.google.com/uc?export=view&id=1aJNHeIzaWyt6zTdZYhVev4oDv_qg7C-c",
+  "image": kidBike,
   "product_type": "bike"
 }, {
   "id": 4,
   "name": "Adult Unisex Helmet",
   "price": 4.00,
-  "image": "http://drive.google.com/uc?export=view&id=1ZDzyHbMXoBegiF2_YZqZRg6HrqQwMWGh",
+  "image": adultHelmet,
   "product_type": "accessory"
 }, {
   "id": 5,
   "name": "Kids Unisex Helmet",
   "price": 3.50,
-  "image": "http://drive.google.com/uc?export=view&id=16DAt2ZOXN3Rjq2HlaoX-d-GJ5xT6Avq4",
+  "image": kidHelmet,
   "product_type": "accessory"
 }, {
   "id": 6,
   "name": "Insurance",
   "price": 9.99,
-  "image": "http://drive.google.com/uc?export=view&id=1Jnw1d59DgofpaW8JIAzhyaZ96tv_rXqB",
+  "image": insurance,
   "product_type": "addon"
 }];
 module.exports = {
   products: products
 };
-},{"../database/maleBike.jpg":"../database/maleBike.jpg"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"../database/maleBike.jpg":"../database/maleBike.jpg","../database/femaleBike.jpg":"../database/femaleBike.jpg","../database/kidBike.jpg":"../database/kidBike.jpg","../database/adultHelmet.jpg":"../database/adultHelmet.jpg","../database/kidsHelmet.jpg":"../database/kidsHelmet.jpg","../database/insurance.jpg":"../database/insurance.jpg"}],"../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
