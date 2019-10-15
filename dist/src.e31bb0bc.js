@@ -47549,7 +47549,8 @@ function (_React$Component) {
       } else {
         this.props.toggleOrderComplete();
       }
-    }
+    } // comment
+
   }, {
     key: "render",
     value: function render() {

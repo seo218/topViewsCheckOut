@@ -20,6 +20,8 @@ class Checkout extends React.Component {
     }
   }
 
+  // comment
+  
   render() {
     return (
       <div >
