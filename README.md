@@ -4,9 +4,6 @@ A mock check out page
 
 ![interface](database/readme.gif)
 
-[click here to see live page](http://bit.ly/checkout9292019)
-
-
 ## Table of Contents
 
 1. [Functionality](#Functionality)
